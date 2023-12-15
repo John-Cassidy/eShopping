@@ -5,3 +5,29 @@ Based on Udemy Course: [.Net Core Microservices using Clean Architecture Impleme
 Medium Blog: [Complete guid to build enterprise edition application end-to-end](https://blog.stackademic.com/creating-net-core-microservices-using-clean-architecture-d229d1683ec9)
 
 Original Authors Github Repo: [eShopping](https://github.com/rahulsahay19/eShopping/tree/master)
+
+## Start Project
+
+Create blank Solution and folder structure
+
+```powershell
+dotnet new sln -n eShopping
+
+mkdir ApiGateways
+mkdir Infrastructure
+mkdir Services
+```
+
+## Catalog Microservice
+
+```powershell
+cd Services
+mkdir Catalog
+```
+
+create 4 projects following Clean Architecture:
+
+- Catalog.API
+- Catalog.Application
+- Catalog.Core
+- Catalog.Infrastructure
