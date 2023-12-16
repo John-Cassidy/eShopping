@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "http": {
+    "Catalog.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,18 +8,8 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5048"
-    },
-    "https": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7091;http://localhost:5048"
-    },
+      "applicationUrl": "http://localhost:9000"
+    }, 
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,

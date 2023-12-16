@@ -31,3 +31,7 @@ create 4 projects following Clean Architecture:
 - Catalog.Application
 - Catalog.Core
 - Catalog.Infrastructure
+
+## URLS
+
+- Catalog.API: https://localhost:9000/swagger/index.html
