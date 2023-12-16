@@ -1,27 +1,20 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Configuration;
+﻿namespace Catalog.API;
 
-namespace Catalog.API;
-
-public class Startup
-{
+public class Startup {
     public IConfiguration Configuration;
-    public Startup(IConfiguration configuration)
-    {
+    public Startup(IConfiguration configuration) {
         Configuration = configuration;
     }
 
-    public void ConfigureServices(IServiceCollection services)
-    {
+    public void ConfigureServices(IServiceCollection services) {
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
         if (env.IsDevelopment()) {
-            app.UseDeveloperExceptionPage(); 
+            app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI();
         }
@@ -33,7 +26,7 @@ public class Startup
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints => {
-            endpoints.MapControllers();           
+            endpoints.MapControllers();
         });
     }
 }
