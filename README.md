@@ -6,6 +6,10 @@ Medium Blog: [Complete guid to build enterprise edition application end-to-end](
 
 Original Authors Github Repo: [eShopping](https://github.com/rahulsahay19/eShopping/tree/master)
 
+## GitHub Action Badges
+
+[![build and test](https://github.com/John-Cassidy/eShopping/actions/workflows/build-and-test.yaml/badge.svg)](https://github.com/John-Cassidy/eShopping/actions/workflows/build-and-test.yaml)
+
 ## Start Project
 
 Create blank Solution and folder structure
