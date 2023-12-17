@@ -2,11 +2,6 @@
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Repositories;
 public class ProductRepository : IProductRepository, IBrandRepository, ITypesRepository {
@@ -18,7 +13,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
     }
 
     public async Task<IEnumerable<Product>> GetProducts() {
-        
+
         return await _context // CatalogContext
             .Products   // IMongoCollection<Product>
             .Find(p => true) // FindFluent<Product, Product>
@@ -31,7 +26,14 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
             .FirstOrDefaultAsync();
     }
     public async Task<IEnumerable<Product>> GetProductsByBrand(string name) {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Brands.Name, name);
+        FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Brands.Name, name);
+        return await _context
+            .Products
+            .Find(filter)
+            .ToListAsync();
+    }
+    public async Task<IEnumerable<Product>> GetProductsByType(string name) {
+        FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Types.Name, name);
         return await _context
             .Products
             .Find(filter)
@@ -73,6 +75,4 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
             .Find(p => true)
             .ToListAsync();
     }
-    
-    
 }

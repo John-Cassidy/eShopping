@@ -2,13 +2,10 @@
 
 namespace Catalog.Application.Mappers;
 
-public static class ProductMapper
-{
+public static class ProductMapper {
     // create Lazy<Imapper> instance
-    private static readonly Lazy<IMapper> Lazy = new(() =>
-    {
-        var config = new MapperConfiguration(cfg =>
-        {
+    private static readonly Lazy<IMapper> Lazy = new(() => {
+        var config = new MapperConfiguration(cfg => {
             cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
             cfg.AddProfile<ProductMappingProfile>();
         });
