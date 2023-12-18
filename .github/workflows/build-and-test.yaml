@@ -24,9 +24,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Remove docker-compose project
+        run: dotnet remove .\eShopping.sln reference .\docker-compose.dcproj
 
       - name: Restore dependencies
         run: dotnet restore .\eShopping.sln
