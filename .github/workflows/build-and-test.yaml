@@ -29,10 +29,10 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Remove docker-compose project
-        run: dotnet remove ${{ github.workspace }}/eShopping.sln reference ${{ github.workspace }}/docker-compose.dcproj
+        run: dotnet remove ${{ github.workspace }}/../eShopping.sln reference ${{ github.workspace }}/../docker-compose.dcproj
 
       - name: Restore dependencies
-        run: dotnet restore ${{ github.workspace }}/eShopping.sln
+        run: dotnet restore ${{ github.workspace }}/../eShopping.sln
 
       - name: Build
         run: dotnet build --no-restore
