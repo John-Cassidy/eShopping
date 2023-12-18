@@ -28,6 +28,11 @@ jobs:
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
 
+      - name: Print working directory and list files
+        run: |
+          pwd
+          ls -l
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
