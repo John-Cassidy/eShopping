@@ -1,6 +1,7 @@
 ﻿using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
@@ -40,11 +41,12 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
             .ToListAsync();
     }
     public async Task<IEnumerable<Product>> GetProductsByName(string name) {
-        FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Name, name);
+        FilterDefinition<Product> filter = Builders<Product>.Filter.Regex(p => p.Name, new BsonRegularExpression(name, "i"));
         return await _context
             .Products
             .Find(filter)
             .ToListAsync();
+
     }
     public async Task<Product> CreateProduct(Product product) {
         await _context.Products.InsertOneAsync(product);

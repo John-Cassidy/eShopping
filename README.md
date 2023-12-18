@@ -39,3 +39,31 @@ create 4 projects following Clean Architecture:
 ## URLS
 
 - Catalog.API: https://localhost:9000/swagger/index.html
+- http://localhost:9000/api/v1/Catalog/GetAllProducts
+- curl -X 'GET' 'http://localhost:9000/api/v1/Catalog/GetAllProducts' -H 'accept:text/plain'
+
+## Dockerfile
+
+Build Catalog.API image: open prompt in solution folder and rull following command:
+
+```powershell
+
+docker build --pull --rm -f "Services\Catalog\Catalog.API\Dockerfile" -t catalogapi:latest .
+```
+
+## Docker Compose
+
+Create docker compose project in Visual Studio after Services\Catalog\Catalog.API\Dockerfile created.
+
+run docker-compose:
+
+```powershell
+
+NOTE: REBUILD IMAGES TO INCLUDE CODE CHANGES AND START
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+NOTE: START CONTAINERS FROM EXISTING IMAGES WITHOUT REBUILDING
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+NOTE: STOP RUNNING CONTAINERS AND REMOVE CONTAINERS
+docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+
+```

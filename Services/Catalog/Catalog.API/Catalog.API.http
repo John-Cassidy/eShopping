@@ -1,6 +1,75 @@
-@Catalog.API_HostAddress = http://localhost:9000
+@Catalog_API_HostAddress = http://localhost:9000
+@version_apiVersion = 1
 
-# GET {{Catalog.API_HostAddress}}/weatherforecast/
-# Accept: application/json
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllBrands
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllProducts
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllTypes
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetProductById/65809c481a5fb4589d1ee04e
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetProductsByBrandName/Adidas
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetProductsByProductName/Adidas Quick Force Indoor Badminton Shoes
+
+###
+
+POST {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/CreateProduct
+Content-Type: application/json
+
+#CreateProductCommand
+{
+  "name": "Saucony Tempus",
+  "summary": "Saucany Tempus is a good shoe for running",
+  "description": "Meet Tempus—a revolutionary experience that’s the first of its kind. It’s got that incredible superfoam bounce you've been missing combined with the adaptive guidance system you need to perform at your best. Don’t snooze on this one.",
+  "imageFile": "images/products/saucony_shoe-1.png",
+  "price": 159.95,
+  "brands": {
+    "id": "63ca5e59065163c16451bd73",
+    "name": "Victor"
+  },
+  "types": {
+    "id": "63ca5e59065163c16451bd73",
+    "name": "Shoes"
+  }
+}
+
+###
+
+PUT {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/UpdateProduct
+Content-Type: application/json
+
+//UpdateProductCommand
+{
+    "id": "65809c481a5fb4589d1ee04e",
+    "name": "Saucony Tempus",
+    "summary": "Saucany Tempus is a great shoe for running",
+    "description": "Meet Tempus—a revolutionary experience that’s the first of its kind. It’s got that incredible superfoam bounce you've been missing combined with the adaptive guidance system you need to perform at your best. Don’t snooze on this one.",
+    "imageFile": "images/products/saucony_shoe-1.png",
+    "brands": {
+      "id": "63ca5e59065163c16451bd73",
+      "name": "Victor"
+    },
+    "types": {
+      "id": "63ca5e59065163c16451bd73",
+      "name": "Shoes"
+    },
+    "price": 159.95
+  }
+
+###
+
+DELETE {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/DeleteProduct/65809c481a5fb4589d1ee04e
 
 ###
