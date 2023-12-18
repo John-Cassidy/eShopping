@@ -23,26 +23,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Echo workspace
-        run: |
-          echo ${{ github.workspace }}
-          echo $GITHUB_WORKSPACE
-
-      - name: Print working directory and list files
-        run: |
-          pwd
-          ls -l
-
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Remove docker-compose project
-        run: dotnet remove ../eShopping.sln reference ../docker-compose.dcproj
-
       - name: Restore dependencies
-        run: dotnet restore ../eShopping.sln
+        run: dotnet restore
 
       - name: Build
         run: dotnet build --no-restore
