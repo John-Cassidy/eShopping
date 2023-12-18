@@ -23,6 +23,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Echo workspace
+        run: |
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
