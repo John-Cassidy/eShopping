@@ -9,11 +9,23 @@ GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllProduc
 
 ###
 
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllProducts?PageIndex=1&PageSize=1&Search=Saucony Tempus
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllProducts?BrandId=63ca5e59065163c16451bd73
+
+###
+
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllProducts?TypeId=63ca5d4bc3a8a58f47299f97
+
+###
+
 GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetAllTypes
 
 ###
 
-GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetProductById/65809c481a5fb4589d1ee04e
+GET {{Catalog_API_HostAddress}}/api/v{{version_apiVersion}}/catalog/GetProductById/602d2149e773f2a3990b47f5
 
 ###
 
