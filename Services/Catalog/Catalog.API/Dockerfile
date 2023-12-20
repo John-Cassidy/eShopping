@@ -1,13 +1,10 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 #USER app
 WORKDIR /app
 ENV ASPNETCORE_URLS http://*:80;
-#ENV ASPNETCORE_URLS http://*:9000;http://*:9001
+#ENV ASPNETCORE_URLS http://*:9000;http://*:9090
 EXPOSE 80
-#EXPOSE 9001
-#EXPOSE 443
+# EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release

@@ -18,18 +18,18 @@ public class BasketController : ApiController
     }
 
     [HttpGet]
-    [Route("[action]/{userName}", Name = "GetBasketByUserName")]
+    [Route("[action]/{userName}", Name = "GetBasket")]
     [ProducesResponseType(typeof(ShoppingCartResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ShoppingCartResponse>> GetBasket(string userName)
+    public async Task<ActionResult<ShoppingCartResponse>> GetBasketAsync(string userName)
     {
         var query = new GetBasketByUserNameQuery(userName);
         var basket = await _mediator.Send(query);
-        return Ok(basket);
+        return Ok(basket ?? new ShoppingCartResponse(userName));
     }
 
     [HttpPost("CreateBasket")]
     [ProducesResponseType(typeof(ShoppingCartResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ShoppingCartResponse>> UpdateBasket([FromBody] CreateShoppingCartCommand createShoppingCartCommand)
+    public async Task<ActionResult<ShoppingCartResponse>> UpdateBasketAsync([FromBody] CreateShoppingCartCommand createShoppingCartCommand)
     {
 
         var basket = await _mediator.Send(createShoppingCartCommand);
@@ -37,9 +37,9 @@ public class BasketController : ApiController
     }
 
     [HttpDelete]
-    [Route("[action]/{userName}", Name = "DeleteBasketByUserName")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<ActionResult<ShoppingCartResponse>> DeleteBasket(string userName)
+    [Route("[action]/{userName}", Name = "DeleteBasket")]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> DeleteBasketAsync(string userName)
     {
         var command = new DeleteBasketByUserNameCommand(userName);
         return Ok(await _mediator.Send(command));

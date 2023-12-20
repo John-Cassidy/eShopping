@@ -39,8 +39,11 @@ create 4 projects following Clean Architecture:
 ## URLS
 
 - Catalog.API: https://localhost:9000/swagger/index.html
-- http://localhost:9000/api/v1/Catalog/GetAllProducts
-- curl -X 'GET' 'http://localhost:9000/api/v1/Catalog/GetAllProducts' -H 'accept:text/plain'
+
+  - http://localhost:9000/api/v1/Catalog/GetAllProducts
+  - curl -X 'GET' 'http://localhost:9000/api/v1/Catalog/GetAllProducts' -H 'accept:text/plain'
+
+- Basket.API: http://localhost:9001/swagger/index.html
 
 ## Dockerfile
 

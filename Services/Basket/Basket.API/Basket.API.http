@@ -1,6 +1,31 @@
-@Basket.API_HostAddress = http://localhost:5141
+@Basket_API_HostAddress = http://localhost:9001
+@version_apiVersion = 1
+@username = testuser
 
-GET {{Basket.API_HostAddress}}/weatherforecast/
+GET {{Basket_API_HostAddress}}/api/v{{version_apiVersion}}/basket/GetBasket/{{username}}
 Accept: application/json
+
+###
+
+POST {{Basket_API_HostAddress}}/api/v{{version_apiVersion}}/basket/CreateBasket
+Content-Type: application/json
+
+#CreateShoppingCartCommand
+{
+  "userName": "{{username}}",
+  "items": [
+    {
+      "quantity": 1,
+      "price": 3500,
+      "productId": "602d2149e773f2a3990b47f5",
+      "imageFile": "images/products/adidas_shoe-1.png",
+      "productName": "Adidas Quick Force Indoor Badminton Shoes"
+    }
+  ]
+}
+
+###
+
+DELETE {{Basket_API_HostAddress}}/api/v{{version_apiVersion}}/basket/DeleteBasket/{{username}}
 
 ###
