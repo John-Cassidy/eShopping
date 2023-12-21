@@ -45,6 +45,8 @@ create 4 projects following Clean Architecture:
 
 - Basket.API: http://localhost:9001/swagger/index.html
 
+- Discount.API: runs GRPC service on port: 9002 / use pgadmin to confirm data is available in postres db
+
 ## Dockerfile
 
 Build Catalog.API image: open prompt in solution folder and rull following command:
@@ -70,3 +72,14 @@ NOTE: STOP RUNNING CONTAINERS AND REMOVE CONTAINERS
 docker-compose -f docker-compose.yml -f docker-compose.override.yml down
 
 ```
+
+## PGAdmin4 running in Docker Desktop
+
+Connect to running postgres container 'dicountdb'
+
+Name: DiscountServer
+Hostname/address: host.docker.internal
+Port: 5432
+Maintenance database: postgres
+Username: yourusername
+Password: yourpassword
