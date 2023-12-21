@@ -12,6 +12,7 @@ public partial class ProductMappingProfile : Profile
     {
         CreateMap<Product, ProductResponse>().ReverseMap();
         CreateMap<Product, CreateProductCommand>().ReverseMap();
+        CreateMap<Product, UpdateProductCommand>().ReverseMap();
         CreateMap<ProductBrand, BrandResponse>().ReverseMap();
         CreateMap<ProductType, TypesResponse>().ReverseMap();
         CreateMap<Pagination<Product>, Pagination<ProductResponse>>().ReverseMap();

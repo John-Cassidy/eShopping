@@ -18,13 +18,14 @@ public class CreateShoppingCartCommandHandler : IRequestHandler<CreateShoppingCa
 
     public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
     {
-        var shoppingCart = await _basketRepository.UpdateBasket(new ShoppingCart
+        var shoppingCartEntity = BasketMapper.Mapper.Map<ShoppingCart>(request);
+        if (shoppingCartEntity is null)
         {
-            UserName = request.UserName,
-            Items = request.Items
-        });
+            throw new ApplicationException("Issue with mapper");
+        }
 
-        var shoppingCartResponse = BasketMapper.Mapper.Map<ShoppingCartResponse>(shoppingCart);
+        var newShoppingCart = await _basketRepository.UpdateBasket(shoppingCartEntity);
+        var shoppingCartResponse = BasketMapper.Mapper.Map<ShoppingCartResponse>(newShoppingCart);
         return shoppingCartResponse;
     }
 }
