@@ -1,4 +1,5 @@
 ﻿using Basket.Application.Commands;
+using Basket.Application.GrpcService;
 using Basket.Application.Mappers;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
@@ -10,14 +11,23 @@ namespace Basket.Application.Handlers;
 public class CreateShoppingCartCommandHandler : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
 {
     private readonly IBasketRepository _basketRepository;
+    private readonly DiscountGrpcService _discountGrpcService;
 
-    public CreateShoppingCartCommandHandler(IBasketRepository basketRepository)
+    public CreateShoppingCartCommandHandler(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService)
     {
         _basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
+        _discountGrpcService = discountGrpcService ?? throw new ArgumentNullException(nameof(discountGrpcService));
     }
 
     public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
     {
+        // send coupon grpc request to calculate latest prices of products into shopping cart
+        foreach (var item in request.Items)
+        {
+            var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+            item.Price -= coupon.Amount;
+        }
+
         var shoppingCartEntity = BasketMapper.Mapper.Map<ShoppingCart>(request);
         if (shoppingCartEntity is null)
         {
