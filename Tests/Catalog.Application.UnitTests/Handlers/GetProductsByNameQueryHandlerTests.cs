@@ -9,22 +9,22 @@ using MediatR;
 using Moq;
 using Xunit;
 
-namespace Application.UnitTests.Catalog;
-public class GetProductsByBrandHandlerTests {
+namespace Catalog.Application.UnitTests.Handlers;
+public class GetProductsByNameQueryHandlerTests {
     private readonly Mock<IProductRepository> _productRepositoryMock;
-    private readonly GetProductsByBrandHandler _handler;
+    private readonly GetProductsByNameQueryHandler _handler;
 
-    public GetProductsByBrandHandlerTests() {
+    public GetProductsByNameQueryHandlerTests() {
         _productRepositoryMock = new Mock<IProductRepository>();
-        _handler = new GetProductsByBrandHandler(_productRepositoryMock.Object);
+        _handler = new GetProductsByNameQueryHandler(_productRepositoryMock.Object);
     }
 
     [Fact]
     public async Task Handle_ValidRequest_ReturnsProductResponseList() {
         // Arrange
-        var brandName = "exampleBrand";
-        var query = new GetProductsByBrandQuery(brandName);
-        _productRepositoryMock.Setup(repo => repo.GetProductsByBrand(brandName)).ReturnsAsync(new List<Product>());
+        var productName = "example";
+        var query = new GetProductsByNameQuery(productName);
+        _productRepositoryMock.Setup(repo => repo.GetProductsByName(query.Name)).ReturnsAsync(new List<Product>());
 
         // Act
         var result = await _handler.Handle(query, CancellationToken.None);

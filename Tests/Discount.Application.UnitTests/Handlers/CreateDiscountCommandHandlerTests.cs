@@ -1,5 +1,3 @@
-// FILEPATH: /C:/DEV/github.com/eShopping/Tests/Application.UnitTests/Discount/CreateDiscountCommandHandlerTest.cs
-
 using Discount.Application.Handlers;
 using Discount.Application.Commands;
 using Discount.Core.Entities;
@@ -9,7 +7,7 @@ using Moq;
 using Xunit;
 using Discount.Grpc.Protos;
 
-namespace Application.UnitTests.Discount;
+namespace Discount.Application.UnitTests.Handlers;
 
 public class CreateDiscountCommandHandlerTests
 {

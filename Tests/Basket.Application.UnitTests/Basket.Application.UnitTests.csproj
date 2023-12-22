@@ -29,10 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Basket\Basket.Application\Basket.Application.csproj" />
     <ProjectReference Include="..\..\Services\Basket\Basket.Core\Basket.Core.csproj" />
-    <ProjectReference Include="..\..\Services\Catalog\Catalog.Application\Catalog.Application.csproj" />
-    <ProjectReference Include="..\..\Services\Catalog\Catalog.Core\Catalog.Core.csproj" />
-    <ProjectReference Include="..\..\Services\Discount\Discount.Application\Discount.Application.csproj" />
-    <ProjectReference Include="..\..\Services\Discount\Discount.Core\Discount.Core.csproj" />
   </ItemGroup>
 
 </Project>

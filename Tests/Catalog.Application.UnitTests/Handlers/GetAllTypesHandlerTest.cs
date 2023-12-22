@@ -4,7 +4,7 @@ using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
 using Moq;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class GetAllTypesHandlerTests {
     [Fact]
     public async Task Handle_ValidRequest_ReturnsTypesResponseList() {

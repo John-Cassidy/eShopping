@@ -6,7 +6,7 @@ using MediatR;
 using Moq;
 using Xunit;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class DeleteProductByIdHandlerTests {
     private readonly Mock<IProductRepository> _productRepositoryMock;
     private readonly DeleteProductByIdHandler _handler;

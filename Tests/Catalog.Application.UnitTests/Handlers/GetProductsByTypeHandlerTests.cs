@@ -9,7 +9,7 @@ using MediatR;
 using Moq;
 using Xunit;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class GetProductsByTypeHandlerTests {
     private readonly Mock<IProductRepository> _productRepositoryMock;
     private readonly GetProductsByTypeHandler _handler;

@@ -6,7 +6,7 @@ using Catalog.Core.Repositories;
 using Catalog.Core.Specs;
 using Moq;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class GetAllProductsHandlerTests {
     [Fact]
     public async Task Handle_ValidRequest_ReturnsProductListResponse() {

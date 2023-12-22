@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UnitTests.Basket;
+namespace Basket.Application.UnitTests.Handlers;
 public class DeleteBasketByUserNameHandlerTests {
     private readonly Mock<IBasketRepository> _basketRepositoryMock;
     private readonly DeleteBasketByUserNameHandler _handler;

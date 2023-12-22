@@ -3,15 +3,9 @@ using Basket.Application.Queries;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
 using Basket.Core.Repositories;
-using MongoDB.Driver;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.UnitTests.Basket;
+namespace Basket.Application.UnitTests.Handlers;
 public class GetBasketByUserNameHandlerTests {
     private readonly Mock<IBasketRepository> _mockBasketRepository;
     private readonly GetBasketByUserNameHandler _handler;

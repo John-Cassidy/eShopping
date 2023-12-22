@@ -6,7 +6,7 @@ using Discount.Grpc.Protos;
 using Grpc.Core;
 using Moq;
 
-namespace Application.UnitTests.Discount;
+namespace Discount.Application.UnitTests.Handlers;
 public class GetDiscountQueryHandlerTests
 {
     [Fact]

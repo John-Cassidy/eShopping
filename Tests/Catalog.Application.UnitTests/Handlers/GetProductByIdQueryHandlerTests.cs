@@ -5,7 +5,7 @@ using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Moq;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class GetProductByIdQueryHandlerTests {
     [Fact]
     public async Task Handle_ValidId_ReturnsProductResponse() {

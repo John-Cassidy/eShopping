@@ -6,7 +6,7 @@ using Discount.Core.Repositories;
 using Discount.Grpc.Protos;
 using Moq;
 
-namespace Application.UnitTests.Discount;
+namespace Discount.Application.UnitTests.Handlers;
 
 public class UpdateDiscountCommandHandlerTests
 {

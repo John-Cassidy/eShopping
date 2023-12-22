@@ -6,7 +6,7 @@ using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Moq;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class GetAllBrandsHandlerTests {
     [Fact]
     public async Task Handle_Should_Return_BrandResponseList() {

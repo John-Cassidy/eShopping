@@ -6,7 +6,7 @@ using Basket.Application.Commands;
 using Basket.Core.Entities;
 using Basket.Application.Responses;
 
-namespace Application.UnitTests.Basket;
+namespace Basket.Application.UnitTests.Handlers;
 
 public class CreateShoppingCartCommandHandlerTests {
     private readonly Mock<IBasketRepository> _basketRepositoryMock;

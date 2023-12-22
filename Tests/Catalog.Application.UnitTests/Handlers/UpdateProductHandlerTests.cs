@@ -6,7 +6,7 @@ using Catalog.Core.Repositories;
 using Catalog.Application.Handlers;
 using Catalog.Application.Commands;
 
-namespace Application.UnitTests.Catalog;
+namespace Catalog.Application.UnitTests.Handlers;
 public class UpdateProductHandlerTests {
     private readonly Mock<IProductRepository> _productRepositoryMock;
     private readonly UpdateProductHandler _updateProductHandler;

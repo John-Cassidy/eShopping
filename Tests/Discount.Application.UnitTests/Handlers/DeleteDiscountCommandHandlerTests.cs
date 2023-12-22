@@ -3,7 +3,7 @@ using Discount.Application.Handlers;
 using Discount.Core.Repositories;
 using Moq;
 
-namespace Application.UnitTests.Discount;
+namespace Discount.Application.UnitTests.Handlers;
 
 public class DeleteDiscountCommandHandlerTests
 {
