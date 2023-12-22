@@ -38,7 +38,7 @@ public class Startup
         services.AddAutoMapper(typeof(Startup));
 
         // add scoped DiscountGrpcService
-        services.AddScoped<DiscountGrpcService>();
+        services.AddScoped<IDiscountGrpcService, DiscountGrpcService>();
         // add grpc client DiscountService.DiscountServiceClient
         services.AddGrpcClient<DiscountService.DiscountServiceClient>(options =>
         {

@@ -12,9 +12,9 @@ namespace Basket.API;
 public class BasketController : ApiController
 {
     private readonly IMediator _mediator;
-    private readonly DiscountGrpcService _discountGrpcService;
+    private readonly IDiscountGrpcService _discountGrpcService;
 
-    public BasketController(IMediator mediator, DiscountGrpcService discountGrpcService)
+    public BasketController(IMediator mediator, IDiscountGrpcService discountGrpcService)
     {
         _mediator = mediator;
         _discountGrpcService = discountGrpcService;

@@ -2,8 +2,7 @@
 
 namespace Basket.Application.GrpcService;
 
-public class DiscountGrpcService
-{   
+public class DiscountGrpcService : IDiscountGrpcService {   
     private readonly DiscountService.DiscountServiceClient _discountServiceClient; // Update the type
 
     public DiscountGrpcService(DiscountService.DiscountServiceClient discountServiceClient) {
