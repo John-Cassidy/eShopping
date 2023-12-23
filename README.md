@@ -22,6 +22,12 @@ mkdir Infrastructure
 mkdir Services
 ```
 
+Build Command
+
+```powershell
+dotnet build eShopping.sln /property:GenerateFullPaths=true /consoleloggerparameters:NoSummary
+```
+
 ## Catalog Microservice
 
 ```powershell
