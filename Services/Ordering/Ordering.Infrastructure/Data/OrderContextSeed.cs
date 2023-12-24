@@ -18,7 +18,7 @@ public class OrderContextSeed
             await dbContext.SaveChangesAsync();
 
             // log information
-            logger.LogInformation("Seed database associated with context {DbContextName}", typeof(OrderContext).Name);
+            logger.LogInformation($"Seed database associated with context {typeof(OrderContext).Name}");
         }
     }
 

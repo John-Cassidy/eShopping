@@ -57,7 +57,6 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseRouting();
-
         app.UseStaticFiles();
         app.UseAuthorization();
 
