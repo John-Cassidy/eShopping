@@ -2,12 +2,7 @@
 
 namespace Ordering.Application.Commands;
 
-public class DeleteOrderCommand : IRequest
+public class DeleteOrderCommand(int id) : IRequest
 {
-    public int Id { get; set; }
-
-    public DeleteOrderCommand(int id)
-    {
-        Id = id;
-    }
+    public int Id { get; set; } = id;
 }

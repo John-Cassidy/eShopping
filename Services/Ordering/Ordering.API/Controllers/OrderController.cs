@@ -31,6 +31,7 @@ public class OrderController : ApiController
     }
 
     // create CheckoutOrder(CheckoutOrderCommand command)
+    //Just for testing locally as it will be processed in queue
     [HttpPost(Name = "CheckoutOrder")]
     [ProducesResponseType(typeof(IEnumerable<OrderResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<OrderResponse>>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
