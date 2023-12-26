@@ -44,7 +44,7 @@ create 4 projects following Clean Architecture:
 
 ## URLS
 
-- Catalog.API: https://localhost:9000/swagger/index.html
+- Catalog.API: http://localhost:9000/swagger/index.html
 
   - http://localhost:9000/api/v1/Catalog/GetAllProducts
   - curl -X 'GET' 'http://localhost:9000/api/v1/Catalog/GetAllProducts' -H 'accept:text/plain'
@@ -52,6 +52,8 @@ create 4 projects following Clean Architecture:
 - Basket.API: http://localhost:9001/swagger/index.html
 
 - Discount.API: runs GRPC service on port: 9002 / use pgadmin to confirm data is available in postres db
+
+- Ordering.API: http://localhost:9003/swagger/index.html
 
 ## Dockerfile
 
@@ -89,3 +91,37 @@ Port: 5432
 Maintenance database: postgres
 Username: yourusername
 Password: yourpassword
+
+## Ordering
+
+### dotnet ef migrations (option 1)
+
+When setting up development for first time with SqlServer container, run manual migration from command line in solution folder.
+
+```powershell
+dotnet ef migrations add InitialCreate -p Services/Ordering/Ordering.Infrastructure -s Services/Ordering/Ordering.Api
+```
+
+Where InitialCreate is the name that we will give our migration, you can change this name with details of what your migration refers to, such as changing a field in a table, adding or removing fields, by convention we try to detail the update that the migration will do.
+
+After -p (project) we pass the name of the solution that contains our DbContext in the case of Infrastructure and -s (solution) we pass our main project in the case of the API.
+
+If everything went well after running the command you will get a message like this: 'Done. To undo this action, use ‘ef migrations remove’'
+
+The migrations remove command is used to remove the created migration if it is not as you wanted.
+
+```powershell
+dotnet ef migrations remove -p Services/Ordering/Ordering.Infrastructure -s Services/Ordering/Ordering.Api
+```
+
+```powershell
+dotnet ef database update -s Services/Ordering/Ordering.Api
+```
+
+### Package Manager Console Commands (option 2)
+
+Open Package Manager Console and select > Ordering.Infrastructure project
+
+Run command:
+
+> Add-Migration InitialCreate

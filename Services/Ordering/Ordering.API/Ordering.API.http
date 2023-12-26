@@ -1,6 +1,8 @@
-@Ordering.API_HostAddress = http://localhost:5012
+@Ordering_API_HostAddress = http://localhost:9003
+@version_apiVersion = 1
+@username = testuser
 
-GET {{Ordering.API_HostAddress}}/weatherforecast/
+GET {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/ordering/GetOrdersByUserName/{{username}}
 Accept: application/json
 
 ###
