@@ -2,7 +2,58 @@
 @version_apiVersion = 1
 @username = testuser
 
-GET {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/ordering/GetOrdersByUserName/{{username}}
+GET {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/order/{{username}}
 Accept: application/json
+
+###
+
+POST {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/order/
+Content-Type: application/json
+
+#CreateCheckoutOrderCommand
+{
+  "userName": "{{username}}",
+  "totalPrice": 750,
+  "firstName": "Frank",
+  "lastName": "Rizzo",
+  "emailAddress": "frankrizzo@gmail.com",
+  "addressLine": "50 Main St.",
+  "country": "USA",
+  "state": "MA",
+  "zipCode": "02138",
+  "cardName": "Visa",
+  "cardNumber": "1234567890123456",
+  "expiration": "12/25",
+  "cvv": "123",
+  "paymentMethod": 1
+}
+
+###
+
+PUT {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/order
+Content-Type: application/json
+
+#CreateCheckoutOrderCommand
+{
+  "id": "2",
+  "userName": "{{username}}",
+  "totalPrice": 750,
+  "firstName": "Test",
+  "lastName": "User",
+  "emailAddress": "testuser@gmail.com",
+  "addressLine": "77 Main St.",
+  "country": "USA",
+  "state": "MA",
+  "zipCode": "02138",
+  "cardName": "Visa",
+  "cardNumber": "1234567890123456",
+  "expiration": "12/25",
+  "cvv": "123",
+  "paymentMethod": 1
+}
+
+###
+
+DELETE {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/order/2
 
 ###
