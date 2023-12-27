@@ -29,3 +29,26 @@ Content-Type: application/json
 DELETE {{Basket_API_HostAddress}}/api/v{{version_apiVersion}}/basket/DeleteBasket/{{username}}
 
 ###
+
+POST {{Basket_API_HostAddress}}/api/v{{version_apiVersion}}/basket/Checkout
+Content-Type: application/json
+
+#BasketCheckoutEvent
+{
+  "userName": "{{username}}",
+  "totalPrice": 0,
+  "firstName": "Frank",
+  "lastName": "Rizzo",
+  "emailAddress": "frankrizzo@gmail.com",
+  "addressLine": "50 Main St.",
+  "country": "USA",
+  "state": "MA",
+  "zipCode": "02138",
+  "cardName": "Visa",
+  "cardNumber": "1234567890123456",
+  "expiration": "12/25",
+  "cvv": "123",
+  "paymentMethod": 1
+}
+
+###

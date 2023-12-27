@@ -125,3 +125,21 @@ Open Package Manager Console and select > Ordering.Infrastructure project
 Run command:
 
 > Add-Migration InitialCreate
+
+## MessageBus / Message Queue
+
+[MassTransit RabbitMQ Transport Documentation](https://masstransit.io/documentation/transports/rabbitmq)
+
+[MassTransit RabbitMQ Bus Transport Configuration](https://masstransit.io/documentation/configuration/transports/rabbitmq)
+
+MassTransit v8 is the first major release since the availability of .NET 6. MassTransit v8 works a significant portion of the underlying components into a more manageable solution structure. Focused on the developer experience, while maintaining compatibility with previous versions, this release brings together the entire MassTransit stack.
+
+[Upgrade Documentation for MassTransit v8](https://masstransit.io/support/upgrade#version-8)
+
+[Documentation for MassTransit v8.1](https://masstransit.io/support/upgrade#version-81)
+
+### RabbitMQ Management
+
+[Local Development URL:](http://localhost:15672/)
+username: guest
+password: guest
