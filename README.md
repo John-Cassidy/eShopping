@@ -143,3 +143,43 @@ MassTransit v8 is the first major release since the availability of .NET 6. Mass
 [Local Development URL:](http://localhost:15672/)
 username: guest
 password: guest
+
+## Application Gateway
+
+use Ocelot Nuget Package to setup API Gateway.
+[Ocelot API Gateway Documentation](https://ocelot.readthedocs.io/en/latest/introduction/gettingstarted.html)
+[Microsoft Learn - Implement API Gateways with Ocelot](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/implement-api-gateways-with-ocelot)
+
+### use Copilot Chat to create the Routes in ocelot.Development.json and ocelot.Local.json
+
+### Basket API
+
+> open ocelot.Development.json
+> open BasketController.cs and keep file selected
+> paste following command in Copilot Chat:
+
+```text
+
+in ocelot.Development.json file create Routes for each of the route in Basket.API BasketController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9001 from basket.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Basket/. stringify value for "Port": 9001. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
+
+```
+
+### Catalog.API
+
+```text
+
+in ocelot.Development.json file create Routes for each of the route in Catalog.API CatalogController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9000 from catalog.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Catalog/. stringify value for "Port": 9000. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
+
+```
+
+### Ordering.API
+
+```text
+
+in ocelot.Development.json file create Routes for each of the route in Ordering.API OrderController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9003 from ordering.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Order/. stringify value for "Port": 9003. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
+
+```
+
+### Disount.API
+
+manually create the routes
