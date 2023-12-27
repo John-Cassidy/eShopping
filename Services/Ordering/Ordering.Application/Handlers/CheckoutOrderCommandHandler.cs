@@ -23,6 +23,11 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
 
     public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
     {
+        // check if request is null and throw ArgumentNullException if it is
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
         // map request to Core.Entities.Order
         var orderEntity = _mapper.Map<Order>(request);
         // add orderEntity to orderRepository

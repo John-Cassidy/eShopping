@@ -21,6 +21,11 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
 
     public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
+        // check if request is null and throw ArgumentNullException if it is
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
         // get order by id
         var orderToDelete = await _orderRepository.GetByIdAsync(request.Id);
         // if orderToDelete is null throw OrderNotFoundException

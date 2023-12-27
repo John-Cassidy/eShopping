@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Ordering.Application.Exceptions;
 using Ordering.Application.Queries;
 using Ordering.Application.Responses;
 using Ordering.Core.Repositories;
@@ -19,9 +20,19 @@ public class GetOrderListQueryHandler : IRequestHandler<GetOrderListQuery, List<
     }
     public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
     {
+        // check if request is null and throw ArgumentNullException if it is
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
         // get orders by username
         var orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
+        // if orderToUpdate is null throw OrderNotFoundException
+        if (orderList == null)
+        {
+            throw new OrderNotFoundException(nameof(List<Ordering.Core.Entities.Order>), orderList);
+        }
         // map orderList to List<OrderResponse> and return
-        return _mapper.Map<List<OrderResponse>>(orderList);        
+        return _mapper.Map<List<OrderResponse>>(orderList);
     }
 }

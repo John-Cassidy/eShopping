@@ -26,6 +26,11 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
 
     public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
+        // check if request is null and throw ArgumentNullException if it is
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
         // get order by request.Id
         var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
         // if orderToUpdate is null throw OrderNotFoundException
