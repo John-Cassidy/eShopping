@@ -164,3 +164,89 @@ use Ocelot Nuget Package to setup API Gateway.
 in ocelot.Development.json file create Routes for each of the route in Basket.API BasketController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9001 from basket.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Basket/. stringify value for "Port": 9001. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
 
 ```
+
+## Ocelot API Gateway
+
+Setup project to route requests to apis.
+
+### Copilot Request input on how to test Ocelot API Gateway
+
+```text
+How to create and run tests for Ocelot.APIGateway project that is hosted in docker container with port 9010. this api runs api that routes requests to Catalog.API, Basket.API, Discount.API, and Order.API with configurations in file ocelot.Development.json. To accomplish this it configures the gateway using nuget packages: Ocelot v22.01 and Ocelot.Cache.CacheManager v22.01.
+```
+
+### Copilot Reponse
+
+To create and run tests for the Ocelot.APIGateway project, you can use a testing framework like xUnit. Here's a step-by-step guide:
+
+1. **Create a new xUnit Test Project:** In Visual Studio, create a new xUnit Test Project in the same solution as your Ocelot.APIGateway project.
+
+2. Add necessary NuGet packages: Add the `Microsoft.AspNetCore.TestHost` and `Microsoft.AspNetCore.Mvc.Testing` NuGet packages to your test project. These packages will allow you to create a test server and make HTTP requests to it.
+
+3. **Create a custom WebApplicationFactory:** This class will create a TestServer that shares the same configuration and service registrations as your Ocelot.APIGateway project.
+
+4. **Write your tests:** Create test methods that send HTTP requests to your API gateway and assert the responses.
+
+5. **Run your tests:** Use the `dotnet test` command to run your tests.
+
+Here's an example of how you can do this:
+
+**Step 1: Create a new xUnit Test Project**
+
+```powershell
+dotnet new xunit -n Ocelot.APIGateway.Tests
+```
+
+**Step 2: Add necessary NuGet packages**
+
+```powershell
+dotnet add package Microsoft.AspNetCore.TestHost
+dotnet add package Microsoft.AspNetCore.Mvc.Testing
+```
+
+**Step 3: Create a custom WebApplicationFactory**
+
+```C#
+public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.UseStartup<TStartup>();
+    }
+}
+```
+
+**Step 4: Write your tests**
+
+```C#
+public class GatewayTests : IClassFixture<CustomWebApplicationFactory<Startup>>
+{
+    private readonly HttpClient _client;
+
+    public GatewayTests(CustomWebApplicationFactory<Startup> factory)
+    {
+        _client = factory.CreateClient();
+    }
+
+    [Fact]
+    public async Task GetCatalog_ReturnsSuccessStatusCode()
+    {
+        // Arrange
+        var request = new HttpRequestMessage(HttpMethod.Get, "/Catalog");
+
+        // Act
+        var response = await _client.SendAsync(request);
+
+        // Assert
+        response.EnsureSuccessStatusCode();
+    }
+}
+```
+
+**Step 5: Run your tests**
+
+```powershell
+dotnet test
+```
+
+This will run your tests and display the results in the terminal.
