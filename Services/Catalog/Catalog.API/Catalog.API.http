@@ -52,7 +52,7 @@ Content-Type: application/json
     "name": "Victor"
   },
   "types": {
-    "id": "63ca5e59065163c16451bd73",
+    "id": "63ca5d4bc3a8a58f47299f97",
     "name": "Shoes"
   }
 }
@@ -74,7 +74,7 @@ Content-Type: application/json
       "name": "Victor"
     },
     "types": {
-      "id": "63ca5e59065163c16451bd73",
+      "id": "63ca5d4bc3a8a58f47299f97",
       "name": "Shoes"
     },
     "price": 159.95

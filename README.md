@@ -157,29 +157,10 @@ use Ocelot Nuget Package to setup API Gateway.
 > open ocelot.Development.json
 > open BasketController.cs and keep file selected
 > paste following command in Copilot Chat:
+> you can modify the text below to generate routes for: Catalog.API, Ordering.API, and Discount.API
 
 ```text
 
 in ocelot.Development.json file create Routes for each of the route in Basket.API BasketController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9001 from basket.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Basket/. stringify value for "Port": 9001. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
 
 ```
-
-### Catalog.API
-
-```text
-
-in ocelot.Development.json file create Routes for each of the route in Catalog.API CatalogController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9000 from catalog.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Catalog/. stringify value for "Port": 9000. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
-
-```
-
-### Ordering.API
-
-```text
-
-in ocelot.Development.json file create Routes for each of the route in Ordering.API OrderController.cs. for DownstreamHostAndPorts section Include Host: host.docker.internal and port 9003 from ordering.api in docker-compose.override.yml. for DownstreamPathTemplate section Include /api/v1/Order/. stringify value for "Port": 9003. for UpstreamPathTemplate do not include /api/v1. for DownstreamScheme key set value="http"
-
-```
-
-### Disount.API
-
-manually create the routes

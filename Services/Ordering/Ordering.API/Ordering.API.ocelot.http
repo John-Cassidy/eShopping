@@ -1,0 +1,8 @@
+@Ordering_API_HostAddress = http://localhost:9003
+@version_apiVersion = 1
+@username = testuser
+
+GET {{Ordering_API_HostAddress}}/api/v{{version_apiVersion}}/order/{{username}}
+Accept: application/json
+
+###

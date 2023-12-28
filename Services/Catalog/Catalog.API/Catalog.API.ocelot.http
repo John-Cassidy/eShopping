@@ -1,0 +1,86 @@
+@Catalog_API_HostAddress = http://localhost:9010
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllBrands
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllProducts
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllProducts?PageIndex=1&PageSize=12&Search=Saucony Tempus
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllProducts?BrandId=63ca5e59065163c16451bd73
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllProducts?PageSize=100&TypeId=63ca5d4bc3a8a58f47299f97
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetAllTypes
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetProductById/658d7ce2851f34aa53b87fdc
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetProductsByBrandName/Adidas
+
+###
+
+GET {{Catalog_API_HostAddress}}/catalog/GetProductsByProductName/Adidas Quick Force Indoor Badminton Shoes
+
+###
+
+POST {{Catalog_API_HostAddress}}/catalog/CreateProduct
+Content-Type: application/json
+
+#CreateProductCommand
+{
+  "name": "Saucony Tempus",
+  "summary": "Saucany Tempus is a good shoe for running",
+  "description": "Meet Tempus—a revolutionary experience that’s the first of its kind. It’s got that incredible superfoam bounce you've been missing combined with the adaptive guidance system you need to perform at your best. Don’t snooze on this one.",
+  "imageFile": "images/products/saucony_shoe-1.png",
+  "price": 159.95,
+  "brands": {
+    "id": "63ca5e59065163c16451bd73",
+    "name": "Victor"
+  },
+  "types": {
+    "id": "63ca5d4bc3a8a58f47299f97",
+    "name": "Shoes"
+  }
+}
+
+###
+
+PUT {{Catalog_API_HostAddress}}/catalog/UpdateProduct
+Content-Type: application/json
+
+//UpdateProductCommand
+{
+    "id": "658d7ce2851f34aa53b87fdc",
+    "name": "Saucony Tempus",
+    "summary": "Saucany Tempus is a great shoe for running",
+    "description": "Meet Tempus—a revolutionary experience that’s the first of its kind. It’s got that incredible superfoam bounce you've been missing combined with the adaptive guidance system you need to perform at your best. Don’t snooze on this one.",
+    "imageFile": "images/products/saucony_shoe-1.png",
+    "brands": {
+      "id": "63ca5e59065163c16451bd73",
+      "name": "Victor"
+    },
+    "types": {
+      "id": "63ca5d4bc3a8a58f47299f97",
+      "name": "Shoes"
+    },
+    "price": 199.95
+  }
+
+###
+
+DELETE {{Catalog_API_HostAddress}}/catalog/DeleteProduct/65831e4f7943947733071e8a
+
+###
