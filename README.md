@@ -250,3 +250,57 @@ dotnet test
 ```
 
 This will run your tests and display the results in the terminal.
+
+## Duende IdentityServer v7 for .NET 8
+
+Duende Software company offers IdentityServer dotnet project templates as a flexible and standards-compliant OpenID Connect and OAuth 2.x framework for ASP.NET Core.
+
+[IdentityServer v7 Documentation](https://docs.duendesoftware.com/identityserver/v7/)
+
+[GitHub Repo](https://github.com/DuendeSoftware/IdentityServer)
+
+[Templates](https://github.com/DuendeSoftware/IdentityServer.Templates)
+
+### Install Templates
+
+```powershell
+
+> dotnet new install Duende.IdentityServer.Templates
+
+The following template packages will be installed:
+   Duende.IdentityServer.Templates
+
+Success: Duende.IdentityServer.Templates::6.3.1 installed the following templates:
+Template Name                                               Short Name     Language  Tags
+----------------------------------------------------------  -------------  --------  ------------------
+Duende BFF Host using a Remote API                          bff-remoteapi  [C#]      Web/IdentityServer
+Duende BFF using a Local API                                bff-localapi   [C#]      Web/IdentityServer
+Duende IdentityServer Empty                                 isempty        [C#]      Web/IdentityServer
+Duende IdentityServer Quickstart UI (UI assets only)        isui           [C#]      Web/IdentityServer
+Duende IdentityServer with ASP.NET Core Identity            isaspid        [C#]      Web/IdentityServer
+Duende IdentityServer with Entity Framework Stores          isef           [C#]      Web/IdentityServer
+Duende IdentityServer with In-Memory Stores and Test Users  isinmem        [C#]      Web/IdentityServer
+```
+
+Uninstall with: `dotnet new uninstall Duende.IdentityServer.Templates`
+
+### Project Creation
+
+run following command from `Infrastructure` folder:
+
+```powershell
+dotnet new isinmem -n EShopping.Identity
+```
+
+this will install v6. after creation update:
+
+- project net8
+- identityserver nuget package to v7 preview 3
+- update other nuget packages to net8 version respectively
+
+[Steps when upgrading v6 to v7](https://docs.duendesoftware.com/identityserver/v7/upgrades/v6.3_to_v7.0/)
+[Notes on 7.0.0-preview2](https://github.com/DuendeSoftware/IdentityServer/releases/tag/7.0.0-preview.2)
+
+### Client Credential Flow
+
+The Client Credentials Flow involves an application exchanging its application credentials, such as clientId and clientSecret, for an access_token.
