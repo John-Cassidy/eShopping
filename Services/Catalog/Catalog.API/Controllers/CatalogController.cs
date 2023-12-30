@@ -3,6 +3,7 @@ using Catalog.Application.Queries;
 using Catalog.Application.Responses;
 using Catalog.Core.Specs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -94,6 +95,7 @@ public class CatalogController : ApiController
     // create CreateProduct action
     [HttpPost]
     [Route("CreateProduct")]
+    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<ProductResponse>> CreateProductAsync([FromBody] CreateProductCommand productCommand)
     {
@@ -105,6 +107,7 @@ public class CatalogController : ApiController
     // create UpdateProduct action
     [HttpPut]
     [Route("UpdateProduct")]
+    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProductCommand productCommand)
     {
@@ -116,6 +119,7 @@ public class CatalogController : ApiController
     // create DeleteProduct action
     [HttpDelete]
     [Route("DeleteProduct/{id}", Name = "DeleteProduct")]
+    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteProductAsync(string id)
     {
