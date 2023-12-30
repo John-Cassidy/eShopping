@@ -18,6 +18,7 @@ public static class Config
             new ApiScope("basketapi"),
             new ApiScope("catalogapi.read"),
             new ApiScope("catalogapi.write"),
+            new ApiScope("eshoppinggateway"),
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -31,6 +32,10 @@ public static class Config
             new ApiResource("Basket", "Basket.API")
             {
                 Scopes = {"basketapi"}
+            },
+            new ApiResource("EShoppingGateway", "EShopping Gateway")
+            {
+                Scopes = {"eshoppinggateway"}
             },
         };
 
@@ -52,7 +57,15 @@ public static class Config
                 ClientSecrets = {new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 AllowedScopes = {"basketapi"}
-            }
+            },
+            new Client
+                {
+                    ClientName = "EShopping Gateway Client",
+                    ClientId = "EShoppingGatewayClient",
+                    ClientSecrets = {new Secret("5c7fd5c5-61a7-4668-ac57-2b4591ec26d2".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = { "eshoppinggateway", "basketapi", "catalogapi.read", "catalogapi.write"}
+                }
 
             // // interactive client using code flow + pkce
             // new Client
