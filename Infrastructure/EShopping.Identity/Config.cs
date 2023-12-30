@@ -16,6 +16,8 @@ public static class Config
         {
             new ApiScope("catalogapi"),
             new ApiScope("basketapi"),
+            new ApiScope("catalogapi.read"),
+            new ApiScope("catalogapi.write"),
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -24,7 +26,7 @@ public static class Config
             // list of microservices
             new ApiResource("Catalog", "Catalog.API")
             {
-                Scopes = {"catalogapi"}
+                 Scopes = {"catalogapi.read", "catalogapi.write"}
             },
             new ApiResource("Basket", "Basket.API")
             {
@@ -42,7 +44,7 @@ public static class Config
                 ClientId = "CatalogApiClient",
                 ClientSecrets = {new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = {"catalogapi"}
+                AllowedScopes = {"catalogapi.read", "catalogapi.write"}
             },
             new Client {
                 ClientName = "Basket API Client",
