@@ -20,7 +20,7 @@ public class Startup
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(authScheme, options =>
             {
-                options.Authority = "https://localhost:9009";
+                options.Authority = "https://localhost:9099";
                 options.Audience = "EShoppingGateway";
             });
         services.AddOcelot()
