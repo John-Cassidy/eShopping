@@ -55,6 +55,19 @@ create 4 projects following Clean Architecture:
 
 - Ordering.API: http://localhost:9003/swagger/index.html
 
+- eshopping-reverseproxy (NGINX Reverse Proxy)
+
+  - http://10.0.0.12:44344
+  - http://localhost:44344
+  - http://host.docker.internal:44344
+  - https://id-local.eshopping.com:44344
+
+once hosts file updated: http://id-local.eshopping.com:44344
+
+http://id-local.eshopping.com:44344/catalog.index.html
+http://id-local.eshopping.com:44344/basket.index.html
+http://id-local.eshopping.com:44344/order.index.html
+
 ## Dockerfile
 
 Build Catalog.API image: open prompt in solution folder and rull following command:
@@ -304,3 +317,43 @@ this will install v6. after creation update:
 ### Client Credential Flow
 
 The Client Credentials Flow involves an application exchanging its application credentials, such as clientId and clientSecret, for an access_token.
+
+## Nginx ApiGateway
+
+create nginx.local.conf file to configure nginx api gateway and reverse proxy
+create nginx.Dockerfile to build image
+add sections to docker-compose.yml and docker-compose.override.yml for:
+
+- nginx reverseproxy @port=9200
+- identityserver @port=9009
+
+build/run docker-compose
+test nginx with route: [id-local.eshopping.com:9200](id-local.eshopping.com:9200)
+
+### Update hosts file
+
+Update hosts file to include resolution to URI: 127.0.0.1 id-local.eshopping.com
+
+### Create Cert with OpenSSL
+
+[Article on how to Create Self Signed Certificate](https://sockettools.com/kb/creating-certificate-using-openssl/)
+[Article on how to Create Self Signed Certificate](https://www.humankode.com/asp-net-core/develop-locally-with-https-self-signed-certificates-and-asp-net-core/)
+
+create id-local.conf file
+run bash command from nginx folder:
+`NOTE: modify password before running script!`
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout id-local.key -out id-local.crt -config id-local.conf -passin pass:[password]
+```
+
+this will create id-local.key, id-local.crt
+
+run bash command from nginx folder and enter password:
+
+```bash
+openssl pkcs12 -export -out id-local.pfx -inkey id-local.key -in id-local.crt
+```
+
+This will create id-local.pfx file.
+Import certificate into on your machine.
