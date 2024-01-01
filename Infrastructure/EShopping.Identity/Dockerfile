@@ -1,9 +1,10 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 # USER app
 WORKDIR /app
-ENV ASPNETCORE_URLS http://*:80;
-#ENV ASPNETCORE_URLS http://*:9009;https://*:9099
-EXPOSE 80
+# ENV ASPNETCORE_URLS http://*:80;
+# ENV ASPNETCORE_URLS http://*:9009;https://*:9099
+ENV ASPNETCORE_URLS http://*:9009;
+EXPOSE 9009
 # EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

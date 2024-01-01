@@ -57,9 +57,10 @@ create 4 projects following Clean Architecture:
 
 - eshopping-reverseproxy (NGINX Reverse Proxy)
 
-  - http://10.0.0.12:9200
-  - http://localhost:9200
-  - http://host.docker.internal:9200
+  - http://10.0.0.12:44344
+  - http://localhost:44344
+  - http://host.docker.internal:44344
+  - https://id-local.eshopping.com:44344
 
 once hosts file updated: http://id-local.eshopping.com:44344
 

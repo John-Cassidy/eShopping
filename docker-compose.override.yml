@@ -124,8 +124,9 @@ services:
 
   identityserver:
     container_name: identityserver
+    hostname: identityserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       # - ASPNETCORE_URLS=http://*:9009
     ports:
-      - '9009:80'
+      - '9009:9009'
