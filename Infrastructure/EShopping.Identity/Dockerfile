@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 # ENV ASPNETCORE_URLS http://*:80;
 # ENV ASPNETCORE_URLS http://*:9009;https://*:9099
-ENV ASPNETCORE_URLS http://*:9009;
+# ENV ASPNETCORE_URLS http://*:9009;
 EXPOSE 9009
 # EXPOSE 443
 

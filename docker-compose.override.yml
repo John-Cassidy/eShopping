@@ -61,6 +61,7 @@ services:
     container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:9000
       - 'DatabaseSettings:ConnectionString=mongodb://catalogdb:27017'
       - 'DatabaseSettings__DatabaseName=CatalogDb'
       - 'DatabaseSettings__CollectionName=Products'
@@ -75,7 +76,7 @@ services:
     container_name: basket.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      #      - ASPNETCORE_URLS=http://*:9001
+      - ASPNETCORE_URLS=http://*:9001
       - 'CacheSettings__ConnectionString=basketdb:6379'
       - 'GrpcSettings__DiscountUrl=http://discount.api'
       - 'EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672'
@@ -89,8 +90,8 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:9002
       - 'DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;'
-      # - ASPNETCORE_URLS=http://*:9002
     depends_on:
       - discountdb
     ports:
@@ -100,7 +101,7 @@ services:
     container_name: ordering.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      #      - ASPNETCORE_URLS=http://*:9003
+      - ASPNETCORE_URLS=http://*:9003
       - 'ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Admin1234;TrustServerCertificate=true;MultipleActiveResultSets=true'
       - 'EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672'
     depends_on:
@@ -124,9 +125,8 @@ services:
 
   identityserver:
     container_name: identityserver
-    hostname: identityserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      # - ASPNETCORE_URLS=http://*:9009
+      - ASPNETCORE_URLS=http://*:9009
     ports:
       - '9009:9009'

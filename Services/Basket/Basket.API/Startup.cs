@@ -10,6 +10,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
@@ -28,6 +30,19 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddApiVersioning();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", policy =>
+            {
+                //TODO read the same from settings for prod deployment
+                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+            });
+        }).AddVersionedApiExplorer(
+            options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
 
         // add redis
         services.AddStackExchangeRedisCache(options =>
@@ -77,22 +92,45 @@ public class Startup
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.Authority = "https://localhost:9099";
+                options.Authority = "https://id-local.eshopping.com:44344";
                 options.Audience = "Basket";
             });
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
     {
-        if (env.IsDevelopment())
+        var nginxPath = "/basket";
+        if (env.IsEnvironment("Local"))
         {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1"));
         }
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+                        $"Basket API {description.GroupName.ToUpperInvariant()}");
+                    options.RoutePrefix = string.Empty;
+                }
+
+                options.DocumentTitle = "Basket API Documentation";
+
+            });
+        }
 
         app.UseHttpsRedirection();
         app.UseRouting();
+        app.UseCors("CorsPolicy");
         app.UseAuthentication();
         app.UseAuthorization();
 

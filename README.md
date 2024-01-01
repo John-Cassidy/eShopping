@@ -64,6 +64,10 @@ create 4 projects following Clean Architecture:
 
 once hosts file updated: http://id-local.eshopping.com:44344
 
+http://id-local.eshopping.com:44344/catalog.index.html
+http://id-local.eshopping.com:44344/basket.index.html
+http://id-local.eshopping.com:44344/order.index.html
+
 ## Dockerfile
 
 Build Catalog.API image: open prompt in solution folder and rull following command:
