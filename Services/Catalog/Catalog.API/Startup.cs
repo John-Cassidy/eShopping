@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Catalog.API.Middleware;
 using Catalog.Application.Handlers;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
@@ -119,6 +120,7 @@ public class Startup
             });
         }
 
+        app.UseMiddleware<AuthorizationLoggingMiddleware>();
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseCors("CorsPolicy");
