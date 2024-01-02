@@ -14,11 +14,9 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new ApiScope("catalogapi"),
-            new ApiScope("basketapi"),
-            new ApiScope("catalogapi.read"),
-            new ApiScope("catalogapi.write"),
-            new ApiScope("eshoppinggateway"),
+            new ApiScope("catalogapi", "Catalog API"),
+            new ApiScope("basketapi", "Basket API"),
+            new ApiScope("eshoppinggateway", "EShopping Gateway"),
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -27,7 +25,7 @@ public static class Config
             // list of microservices
             new ApiResource("Catalog", "Catalog.API")
             {
-                 Scopes = {"catalogapi.read", "catalogapi.write"}
+                 Scopes = {"catalogapi"}
             },
             new ApiResource("Basket", "Basket.API")
             {
@@ -49,7 +47,7 @@ public static class Config
                 ClientId = "CatalogApiClient",
                 ClientSecrets = {new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = {"catalogapi.read", "catalogapi.write"}
+                AllowedScopes = {"catalogapi"}
             },
             new Client {
                 ClientName = "Basket API Client",
@@ -59,13 +57,13 @@ public static class Config
                 AllowedScopes = {"basketapi"}
             },
             new Client
-                {
-                    ClientName = "EShopping Gateway Client",
-                    ClientId = "EShoppingGatewayClient",
-                    ClientSecrets = {new Secret("5c7fd5c5-61a7-4668-ac57-2b4591ec26d2".Sha256())},
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "eshoppinggateway", "basketapi", "catalogapi.read", "catalogapi.write"}
-                }
+            {
+                ClientName = "EShopping Gateway Client",
+                ClientId = "EShoppingGatewayClient",
+                ClientSecrets = {new Secret("5c7fd5c5-61a7-4668-ac57-2b4591ec26d2".Sha256())},
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedScopes = { "eshoppinggateway", "basketapi", "catalogapi"}
+            }
 
             // // interactive client using code flow + pkce
             // new Client

@@ -81,12 +81,16 @@ public class Startup
             {
                 options.Authority = "https://id-local.eshopping.com:44344";
                 options.Audience = "Catalog";
+                // options.RequireHttpsMetadata = false;
+                // options.TokenValidationParameters.ValidateAudience = false;
             });
         services.AddAuthorization(options =>
-        {
-            options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-            options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
-        });
+            options.AddPolicy("ApiScope", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim("scope", "catalogapi");
+            })
+        );
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -130,7 +134,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
+            endpoints.MapControllers().RequireAuthorization("ApiScope");
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()
             {
                 Predicate = _ => true,

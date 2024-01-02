@@ -14,6 +14,8 @@ internal static class HostingExtensions
 
         var isBuilder = builder.Services.AddIdentityServer(options =>
             {
+                options.IssuerUri = "https://id-local.eshopping.com:44344";
+
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
@@ -79,10 +81,10 @@ internal static class HostingExtensions
         app.UseStaticFiles();
         app.UseRouting();
         app.UseIdentityServer();
-        app.UseAuthorization();
 
-        app.MapRazorPages()
-            .RequireAuthorization();
+        // uncomment, if you want to add a UI
+        app.UseAuthorization();
+        app.MapRazorPages().RequireAuthorization();
 
         return app;
     }
