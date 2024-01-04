@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Common.Logging.Correlation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.Commands;
@@ -11,8 +12,6 @@ public class OrderController : ApiController
 {
     private readonly IMediator _mediator;
     private readonly ILogger<OrderController> _logger;
-
-    // create constructor with IMediator, ILOgger<OrderController>
 
     public OrderController(IMediator mediator, ILogger<OrderController> logger)
     {

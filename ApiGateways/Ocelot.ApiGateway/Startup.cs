@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Common.Logging.Correlation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -16,13 +17,15 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        var authScheme = "EShoppingGatewayAuthScheme";
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(authScheme, options =>
-            {
-                options.Authority = "https://localhost:9099";
-                options.Audience = "EShoppingGateway";
-            });
+        // var authScheme = "EShoppingGatewayAuthScheme";
+        // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(authScheme, options =>
+        //     {
+        //         options.Authority = "https://localhost:9099";
+        //         options.Audience = "EShoppingGateway";
+        //     });
+
+        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
         services.AddOcelot()
             .AddCacheManager(x => x.WithDictionaryHandle());
     }
@@ -34,6 +37,7 @@ public class Startup
             app.UseDeveloperExceptionPage();
         }
 
+        app.AddCorrelationIdMiddleware();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {

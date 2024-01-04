@@ -1,4 +1,5 @@
-﻿using Discount.Application.Commands;
+﻿using Common.Logging.Correlation;
+using Discount.Application.Commands;
 using Discount.Application.Queries;
 using Discount.Grpc.Protos;
 using Grpc.Core;
@@ -12,12 +13,15 @@ public class DiscountService : Grpc.Protos.DiscountService.DiscountServiceBase
     private readonly IMediator _mediator;
     // create ILogger<DiscountService> _logger
     private readonly ILogger<DiscountService> _logger;
+    private readonly ICorrelationIdGenerator _correlationIdGenerator;
 
     // inject IMediator and ILogger<DiscountService> into the constructor
-    public DiscountService(IMediator mediator, ILogger<DiscountService> logger)
+    public DiscountService(IMediator mediator, ILogger<DiscountService> logger, ICorrelationIdGenerator correlationIdGenerator)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _correlationIdGenerator = correlationIdGenerator ?? throw new ArgumentNullException(nameof(correlationIdGenerator));
+        _logger.LogInformation("CorrelationId {correlationId}:", _correlationIdGenerator.Get());
     }
 
     // override the GetDiscount method

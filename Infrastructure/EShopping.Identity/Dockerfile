@@ -9,6 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Infrastructure/EShopping.Identity/EShopping.Identity.csproj", "Infrastructure/EShopping.Identity/"]
+COPY ["Infrastructure/Common.Logging/Common.Logging.csproj", "Infrastructure/Common.Logging/"]
 RUN dotnet restore "./Infrastructure/EShopping.Identity/./EShopping.Identity.csproj"
 COPY . .
 WORKDIR "/src/Infrastructure/EShopping.Identity"

@@ -23,6 +23,8 @@ public class BasketOrderingConsumer : IConsumer<BasketCheckoutEvent>
 
     public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
     {
+        using var scope = _logger.BeginScope("Consuming Basket Checkout Event for {correlationId}",
+            context.Message.CorrelationId);
         // create variable basketCheckoutEvent with context.Message
         var basketCheckoutEvent = context.Message;
         // create variable command with _mapper.Map<CheckoutOrderCommand>(basketCheckoutEvent)

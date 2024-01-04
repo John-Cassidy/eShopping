@@ -2,6 +2,7 @@
 using Catalog.Application.Queries;
 using Catalog.Application.Responses;
 using Catalog.Core.Specs;
+using Common.Logging.Correlation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -12,12 +13,15 @@ public class CatalogController : ApiController
 {
     private readonly IMediator _mediator;
     private readonly ILogger<CatalogController> _logger;
+    private readonly ICorrelationIdGenerator _correlationIdGenerator;
 
     // create constructor injecting IMediator
-    public CatalogController(IMediator mediator, ILogger<CatalogController> logger)
+    public CatalogController(IMediator mediator, ILogger<CatalogController> logger, ICorrelationIdGenerator correlationIdGenerator)
     {
         _mediator = mediator;
         _logger = logger;
+        _correlationIdGenerator = correlationIdGenerator;
+        _logger.LogInformation("CorrelationId {correlationId}:", _correlationIdGenerator.Get());
     }
 
     [HttpGet]
