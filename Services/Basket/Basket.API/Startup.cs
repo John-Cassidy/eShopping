@@ -78,23 +78,25 @@ public class Startup
         });
         services.AddMassTransitHostedService(); // for MassTransit 7.0
 
-        //Identity Server changes
-        var userPolicy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        services.AddControllers();
 
-        services.AddControllers(config =>
-        {
-            config.Filters.Add(new AuthorizeFilter(userPolicy));
-        });
+        // //Identity Server changes
+        // var userPolicy = new AuthorizationPolicyBuilder()
+        //     .RequireAuthenticatedUser()
+        //     .Build();
 
-        services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = "https://id-local.eshopping.com:44344";
-                options.Audience = "Basket";
-            });
+        // services.AddControllers(config =>
+        // {
+        //     config.Filters.Add(new AuthorizeFilter(userPolicy));
+        // });
+
+        // services
+        //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(options =>
+        //     {
+        //         options.Authority = "https://id-local.eshopping.com:44344";
+        //         options.Audience = "Basket";
+        //     });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

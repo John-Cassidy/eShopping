@@ -3,7 +3,6 @@ using Catalog.Application.Queries;
 using Catalog.Application.Responses;
 using Catalog.Core.Specs;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -59,10 +58,18 @@ public class CatalogController : ApiController
     [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetAllProductsAsync([FromQuery] CatalogSpecParams catalogSpecParams)
     {
-        var query = new GetAllProductsQuery(catalogSpecParams);
-        var result = await _mediator.Send(query);
-        _logger.LogInformation("All products retrieved");
-        return Ok(result);
+        try
+        {
+            var query = new GetAllProductsQuery(catalogSpecParams);
+            var result = await _mediator.Send(query);
+            _logger.LogInformation("All products retrieved");
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An Exception has occured: {Exception}");
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+        }
     }
 
     // create GetAllBrands action

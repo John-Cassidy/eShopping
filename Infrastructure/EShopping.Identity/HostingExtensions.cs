@@ -1,5 +1,6 @@
 using Duende.IdentityServer;
 using EShopping.Identity;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Serilog;
@@ -12,9 +13,13 @@ internal static class HostingExtensions
     {
         builder.Services.AddRazorPages();
 
+        builder.Services.AddDataProtection()
+            .SetApplicationName("EShopping.Identity");
+
         var isBuilder = builder.Services.AddIdentityServer(options =>
             {
-                options.IssuerUri = "https://id-local.eshopping.com:44344";
+                // options.IssuerUri = "https://id-local.eshopping.com:44344";
+                options.IssuerUri = "https://localhost:9099";
 
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
@@ -63,7 +68,7 @@ internal static class HostingExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        // app.UseSerilogRequestLogging();
+        app.UseSerilogRequestLogging();
 
         var forwardedHeadersOptions = new ForwardedHeadersOptions
         {
