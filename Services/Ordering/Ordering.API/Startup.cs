@@ -66,34 +66,41 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
     {
-        var nginxPath = "/ordering";
-        if (env.IsEnvironment("Local"))
+        if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ordering.API v1"));
         }
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                foreach (var description in provider.ApiVersionDescriptions)
-                {
-                    options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
-                        $"Ordering API {description.GroupName.ToUpperInvariant()}");
-                    options.RoutePrefix = string.Empty;
-                }
 
-                options.DocumentTitle = "Ordering API Documentation";
+        // var nginxPath = "/ordering";
+        // if (env.IsEnvironment("Local"))
+        // {
+        //     app.UseDeveloperExceptionPage();
+        //     app.UseSwagger();
+        //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ordering.API v1"));
+        // }
+        // if (env.IsDevelopment())
+        // {
+        //     app.UseDeveloperExceptionPage();
+        //     app.UseForwardedHeaders(new ForwardedHeadersOptions
+        //     {
+        //         ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        //     });
+        //     app.UseSwagger();
+        //     app.UseSwaggerUI(options =>
+        //     {
+        //         foreach (var description in provider.ApiVersionDescriptions)
+        //         {
+        //             options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+        //                 $"Ordering API {description.GroupName.ToUpperInvariant()}");
+        //             options.RoutePrefix = string.Empty;
+        //         }
 
-            });
-        }
+        //         options.DocumentTitle = "Ordering API Documentation";
+
+        //     });
+        // }
 
         app.UseHttpsRedirection();
         app.UseRouting();

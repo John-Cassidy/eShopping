@@ -1,17 +1,17 @@
 version: '3.4'
 
 services:
-  reverseproxy:
-    container_name: nginxgateway
-    restart: always
-    depends_on:
-      - identityserver
-      - catalog.api
-      - basket.api
-      - discount.api
-      - ordering.api
-    ports:
-      - '44344:44344'
+  # reverseproxy:
+  #   container_name: nginxgateway
+  #   restart: always
+  #   depends_on:
+  #     - identityserver
+  #     - catalog.api
+  #     - basket.api
+  #     - discount.api
+  #     - ordering.api
+  #   ports:
+  #     - '44344:44344'
 
   catalogdb:
     container_name: catalogdb
@@ -67,6 +67,7 @@ services:
       - 'DatabaseSettings__CollectionName=Products'
       - 'DatabaseSettings__BrandsCollection=Brands'
       - 'DatabaseSettings__TypesCollection=Types'
+      - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
     depends_on:
       - catalogdb
     ports:
@@ -80,6 +81,7 @@ services:
       - 'CacheSettings__ConnectionString=basketdb:6379'
       - 'GrpcSettings__DiscountUrl=http://discount.api'
       - 'EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672'
+      - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
     depends_on:
       - basketdb
       - rabbitmq
@@ -92,6 +94,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://*:9002
       - 'DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;'
+      - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
     depends_on:
       - discountdb
     ports:
@@ -104,6 +107,7 @@ services:
       - ASPNETCORE_URLS=http://*:9003
       - 'ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Admin1234;TrustServerCertificate=true;MultipleActiveResultSets=true'
       - 'EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672'
+      - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
     depends_on:
       - orderdb
       - rabbitmq
@@ -114,6 +118,7 @@ services:
     container_name: ocelotapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
     depends_on:
       #      - identityserver
       - catalog.api
@@ -123,18 +128,40 @@ services:
     ports:
       - '9010:80'
 
-  identityserver:
-    container_name: identityserver
-    hostname: identityserver
+  # identityserver:
+  #   container_name: identityserver
+  #   hostname: identityserver
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=https://*:9099;http://*:9009
+  #     - ASPNETCORE_HTTP_PORT=9009
+  #     - ASPNETCORE_HTTPS_PORT=9099
+  #     - ASPNETCORE_Kestrel__Certificates__Default__Password=Beherenow_Beginnersm3nd
+  #     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+  #     - 'ElasticConfiguration__Uri=http://elasticsearch:9200'
+  #   ports:
+  #     - '9009:9009'
+  #     - '9099:9099'
+  #   volumes:
+  #     - ./LocalhostCertificate:/https:ro
+
+  elasticsearch:
+    container_name: elasticsearch
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://*:9099;http://*:9009
-      - ASPNETCORE_HTTP_PORT=9009
-      - ASPNETCORE_HTTPS_PORT=9099
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=Beherenow_Beginnersm3nd
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/id-local.pfx
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - discovery.type=single-node
     ports:
-      - '9009:9009'
-      - '9099:9099'
+      - '9200:9200'
     volumes:
-      - ./ApiGateways/nginx:/https:ro
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  kibana:
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - '5601:5601'

@@ -1,4 +1,5 @@
-﻿using EShopping.Identity;
+﻿using Common.Logging;
+using EShopping.Identity;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -14,10 +15,13 @@ try
     // // Configure Kestrel to use HTTPS
     // builder.WebHost.UseKestrel().UseUrls("https://*.9099", "http://*.9009");
 
-    builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(ctx.Configuration));
+    // builder.Host.UseSerilog((ctx, lc) => lc
+    //     .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+    //     .Enrich.FromLogContext()
+    //     .ReadFrom.Configuration(ctx.Configuration));
+
+    builder.Host.UseSerilog(Logging.ConfigureLogger); // Refactor this line
+
 
     var app = builder
         .ConfigureServices()

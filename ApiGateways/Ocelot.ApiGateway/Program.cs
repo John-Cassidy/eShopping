@@ -1,3 +1,6 @@
+using CommonLogging = Common.Logging.Logging;
+using Serilog;
+
 namespace Ocelot.ApiGateway
 {
     public class Program
@@ -16,6 +19,6 @@ namespace Ocelot.ApiGateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog(CommonLogging.ConfigureLogger);
     }
 }

@@ -357,3 +357,16 @@ openssl pkcs12 -export -out id-local.pfx -inkey id-local.key -in id-local.crt
 
 This will create id-local.pfx file.
 Import certificate into on your machine.
+
+## Elastic (ELK) Stack
+
+ELK Stack is a collection of three open-source products: Elasticsearch, Logstash, and Kibana, all developed, managed and maintained by the company Elastic.
+
+Elasticsearch: It is a NoSQL database that is based on the Lucene search engine. Elasticsearch is a highly scalable product that enables you to store, search, and analyze big volumes of data in real time.
+
+Logstash: It is a data collection pipeline tool. It collects data inputs and feeds it into Elasticsearch. Logstash has a variety of filters that transform and shape the data as it’s ingested into Elasticsearch.
+
+Kibana: It is a data visualization tool that is used to visualize the data in Elasticsearch. Kibana provides a wide variety of visualizations and dashboards for data analysis.
+
+Together, these three different products provide a powerful stack for data ingestion, storage, and visualization. It's particularly popular for log and event data, but can be used for other types of data as well.
+

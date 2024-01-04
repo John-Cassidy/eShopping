@@ -101,34 +101,41 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
     {
-        var nginxPath = "/basket";
-        if (env.IsEnvironment("Local"))
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1"));
-        }
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                foreach (var description in provider.ApiVersionDescriptions)
-                {
-                    options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
-                        $"Basket API {description.GroupName.ToUpperInvariant()}");
-                    options.RoutePrefix = string.Empty;
-                }
-
-                options.DocumentTitle = "Basket API Documentation";
-
-            });
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1"));
         }
+
+        // var nginxPath = "/basket";
+        // if (env.IsEnvironment("Local"))
+        // {
+        //     app.UseDeveloperExceptionPage();
+        //     app.UseSwagger();
+        //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1"));
+        // }
+        // if (env.IsDevelopment())
+        // {
+        //     app.UseDeveloperExceptionPage();
+        //     app.UseForwardedHeaders(new ForwardedHeadersOptions
+        //     {
+        //         ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        //     });
+        //     app.UseSwagger();
+        //     app.UseSwaggerUI(options =>
+        //     {
+        //         foreach (var description in provider.ApiVersionDescriptions)
+        //         {
+        //             options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+        //                 $"Basket API {description.GroupName.ToUpperInvariant()}");
+        //             options.RoutePrefix = string.Empty;
+        //         }
+
+        //         options.DocumentTitle = "Basket API Documentation";
+
+        //     });
+        // }
 
         app.UseHttpsRedirection();
         app.UseRouting();
