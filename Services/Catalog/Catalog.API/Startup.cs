@@ -29,20 +29,28 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
         services.AddApiVersioning();
-        services.AddCors(options =>
-        {
-            options.AddPolicy("CorsPolicy", policy =>
-            {
-                //TODO read the same from settings for prod deployment
-                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-            });
-        }).AddVersionedApiExplorer(
-            options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
-            });
+        // .AddVersionedApiExplorer(
+        // options =>
+        // {
+        //     options.GroupNameFormat = "'v'VVV";
+        //     options.SubstituteApiVersionInUrl = true;
+        // });
+
+        // services.AddCors(options =>
+        // {
+        //     options.AddPolicy("CorsPolicy", policy =>
+        //     {
+        //         //TODO read the same from settings for prod deployment
+        //         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        //     });
+        // }).AddVersionedApiExplorer(
+        //     options =>
+        //     {
+        //         options.GroupNameFormat = "'v'VVV";
+        //         options.SubstituteApiVersionInUrl = true;
+        //     });
 
         var connectionString = Configuration["DatabaseSettings:ConnectionString"];
         if (connectionString == null)
@@ -65,8 +73,6 @@ public class Startup
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IBrandRepository, ProductRepository>();
         services.AddScoped<ITypesRepository, ProductRepository>();
-
-        services.AddControllers();
 
         // services
         //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -94,7 +100,7 @@ public class Startup
         // );
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env) //, IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())
         {
@@ -132,12 +138,12 @@ public class Startup
         // }
 
         // app.UseMiddleware<AuthorizationLoggingMiddleware>();
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
         app.UseRouting();
-        app.UseCors("CorsPolicy");
-        app.UseAuthentication();
+        // app.UseCors("CorsPolicy");
+        // app.UseAuthentication();
         app.UseStaticFiles();
-        app.UseAuthorization();
+        // app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
