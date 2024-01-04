@@ -3,7 +3,6 @@ using Catalog.Application.Queries;
 using Catalog.Application.Responses;
 using Catalog.Core.Specs;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -12,11 +11,20 @@ namespace Catalog.API.Controllers;
 public class CatalogController : ApiController
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<CatalogController> _logger;
 
     // create constructor injecting IMediator
-    public CatalogController(IMediator mediator)
+    public CatalogController(IMediator mediator, ILogger<CatalogController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
+    }
+
+    [HttpGet]
+    [Route("GetUserClaims")]
+    public IActionResult Get()
+    {
+        return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
     }
 
     // create GetProductById action
@@ -50,10 +58,18 @@ public class CatalogController : ApiController
     [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetAllProductsAsync([FromQuery] CatalogSpecParams catalogSpecParams)
     {
-        var query = new GetAllProductsQuery(catalogSpecParams);
-        var result = await _mediator.Send(query);
-
-        return Ok(result);
+        try
+        {
+            var query = new GetAllProductsQuery(catalogSpecParams);
+            var result = await _mediator.Send(query);
+            _logger.LogInformation("All products retrieved");
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An Exception has occured: {Exception}");
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+        }
     }
 
     // create GetAllBrands action
@@ -95,7 +111,6 @@ public class CatalogController : ApiController
     // create CreateProduct action
     [HttpPost]
     [Route("CreateProduct")]
-    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<ProductResponse>> CreateProductAsync([FromBody] CreateProductCommand productCommand)
     {
@@ -107,7 +122,6 @@ public class CatalogController : ApiController
     // create UpdateProduct action
     [HttpPut]
     [Route("UpdateProduct")]
-    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> UpdateProductAsync([FromBody] UpdateProductCommand productCommand)
     {
@@ -119,7 +133,6 @@ public class CatalogController : ApiController
     // create DeleteProduct action
     [HttpDelete]
     [Route("DeleteProduct/{id}", Name = "DeleteProduct")]
-    [Authorize(Policy = "CanWrite")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteProductAsync(string id)
     {

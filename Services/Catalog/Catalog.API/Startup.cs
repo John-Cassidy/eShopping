@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Catalog.API.Middleware;
 using Catalog.Application.Handlers;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace Catalog.API;
@@ -64,28 +66,32 @@ public class Startup
         services.AddScoped<IBrandRepository, ProductRepository>();
         services.AddScoped<ITypesRepository, ProductRepository>();
 
-        //Identity Server changes
-        var userPolicy = new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build();
+        services.AddControllers();
 
-        services.AddControllers(config =>
-        {
-            config.Filters.Add(new AuthorizeFilter(userPolicy));
-        });
-
-        services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = "https://id-local.eshopping.com:44344";
-                options.Audience = "Catalog";
-            });
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-            options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
-        });
+        // services
+        //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(options =>
+        //     {
+        //         options.Authority = "https://id-local.eshopping.com:44344";
+        //         options.RequireHttpsMetadata = false;
+        //         options.TokenValidationParameters = new TokenValidationParameters
+        //         {
+        //             ValidateIssuer = true,
+        //             ValidateAudience = true,
+        //             ValidateLifetime = true,
+        //             ValidIssuer = "https://id-local.eshopping.com:44344",
+        //             ValidAudience = "Catalog",
+        //         };
+        //         // options.Audience = "Catalog";    
+        //         options.Audience = "https://id-local.eshopping.com:44344/resources";
+        //     });
+        // services.AddAuthorization(options =>
+        //     options.AddPolicy("ApiScope", policy =>
+        //     {
+        //         policy.RequireAuthenticatedUser();
+        //         policy.RequireClaim("scope", "catalogapi");
+        //     })
+        // );
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -115,10 +121,10 @@ public class Startup
                 }
 
                 options.DocumentTitle = "Catalog API Documentation";
-
             });
         }
 
+        // app.UseMiddleware<AuthorizationLoggingMiddleware>();
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseCors("CorsPolicy");
@@ -128,7 +134,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
+            endpoints.MapControllers(); // .RequireAuthorization("ApiScope");
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()
             {
                 Predicate = _ => true,
