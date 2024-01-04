@@ -1,4 +1,5 @@
-﻿using EventBus.Messages;
+﻿using Common.Logging.Correlation;
+using EventBus.Messages;
 using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
