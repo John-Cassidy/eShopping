@@ -370,3 +370,21 @@ Kibana: It is a data visualization tool that is used to visualize the data in El
 
 Together, these three different products provide a powerful stack for data ingestion, storage, and visualization. It's particularly popular for log and event data, but can be used for other types of data as well.
 
+### Project Enhancements
+
+Enhance Common.Logging Library to implement ELK Stack with Elasticsearch, Logstash, and Kibana.
+
+Enhance with CorrelationID.
+
+- Add to APIs
+- Update elasticsearch fields to include correlationId
+- Publish correlationId through Basket Checkout to Order via Service Bus
+
+HealthChecks
+
+- Add AddHealthChecks Service to API containers
+- catalog.api http://localhost:9000/health
+- basket.api http://localhost:9001/health
+- discount.api http://localhost:9002/health
+- ordering.api http://localhost:9003/health
+- add to mongo, redis, sql server healthchecks
