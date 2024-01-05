@@ -388,3 +388,11 @@ HealthChecks
 - discount.api http://localhost:9002/health
 - ordering.api http://localhost:9003/health
 - add to mongo, redis, sql server healthchecks
+
+## API Versioning
+
+REST API versioning is a critical aspect of maintaining a successful and well-designed API. By including a version number in the URL or headers of an HTTP request, developers can ensure that clients of the API are using the correct version and can make changes to the API without breaking existing clients. There are several different approaches to versioning REST APIs, including using the version number in the URL, using the Accept header, and using custom headers.
+
+[Article: Managing Multiple Versions of Your API with .NET and Swagger](https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5)
+
+In this article, they will explore the different approaches to REST API versioning and discuss the pros and cons of each approach. They will also look at some best practices for implementing REST API versioning in your own projects.
