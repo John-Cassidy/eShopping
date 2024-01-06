@@ -399,6 +399,8 @@ In this article, they will explore the different approaches to REST API versioni
 
 ## Angular
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+
 The front-end application is built with Angular v17 standalone option that allows the application to use Standalone Components.
 
 [Article on Standalone Components](https://angular.io/guide/standalone-components)
@@ -425,9 +427,9 @@ Use npx to instead of Angular CLI to create projects, components, etc...
 [Article on Using npx](https://medium.com/@kbartsch/npx-how-to-use-multiple-angular-projects-with-different-versions-80b46085fa89)
 
 ```powershell
-npx @angular/cli new client
+npx @angular/cli new client --dry-run
 # or use this
-npx -p @angular/cli ng
+npx -p @angular/cli ng new client --dry-run
 
 Need to install the following packages:
 @angular/cli@17.0.9
@@ -465,20 +467,10 @@ CREATE client/src/assets/.gitkeep (0 bytes)
 ### Commands
 
 Angular Project Commands from client folder
-
-```powershell
-
-#install node_modules
-npm install
-
-# run frontend application
-npx ng serve
-#or
-npm start //(default npm script inside package.json)
-
-
-```
+(See README in client folder for more detailed list)
 
 ### Other Considerations
 
 [How to Setup ESLint and Prettier in an Angular Project](https://blog.stackademic.com/how-to-setup-eslint-and-prettier-in-an-angular-project-82065799bc00)
+
+### Mods
