@@ -1,0 +1,38 @@
+/* 
+The "baseUrl": "./" option in the tsconfig.json file is used to resolve non-relative module names. It specifies the base directory to resolve these paths from.
+
+If "baseUrl": "./" is not present in the tsconfig.json file, it means that the project is not using non-relative paths, or it's using another method to resolve them, such as path mapping with the "paths" option.
+
+In other words, if you're not importing modules using absolute paths (like import { MyComponent } from 'src/app/my-component';), but instead using relative paths (like import { MyComponent } from './my-component';), you don't need the "baseUrl" option.
+
+However, if you want to start using non-relative paths, you can add "baseUrl": "./" to your compilerOptions in your tsconfig.json file. This will tell the TypeScript compiler that non-relative module imports should be resolved relative to the base URL, which is the current directory ("./").
+*/
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

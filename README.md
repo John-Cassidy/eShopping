@@ -396,3 +396,128 @@ REST API versioning is a critical aspect of maintaining a successful and well-de
 [Article: Managing Multiple Versions of Your API with .NET and Swagger](https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5)
 
 In this article, they will explore the different approaches to REST API versioning and discuss the pros and cons of each approach. They will also look at some best practices for implementing REST API versioning in your own projects.
+
+## Angular
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+
+The front-end application is built with Angular v17 standalone option that allows the application to use Standalone Components.
+
+[Article on Standalone Components](https://angular.io/guide/standalone-components)
+
+### Prerequisites
+
+Commands:
+
+```powershell
+node --version
+v20.10.0
+
+npm --version
+10.2.3
+
+npx --version
+10.2.3
+#NPX comes along with the NPM installation by default
+```
+
+### Create Project
+
+Use npx to instead of Angular CLI to create projects, components, etc...
+[Article on Using npx](https://medium.com/@kbartsch/npx-how-to-use-multiple-angular-projects-with-different-versions-80b46085fa89)
+
+```powershell
+npx @angular/cli new client --dry-run
+# or use this
+npx -p @angular/cli ng new client --dry-run
+
+Need to install the following packages:
+@angular/cli@17.0.9
+Ok to proceed? (y) y
+? Which stylesheet format would you like to use? SCSS   [
+https://sass-lang.com/documentation/syntax#scss                ]
+? Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)?
+No
+CREATE client/angular.json (2867 bytes)
+CREATE client/package.json (1075 bytes)
+CREATE client/README.md (1087 bytes)
+CREATE client/tsconfig.json (936 bytes)
+CREATE client/.editorconfig (290 bytes)
+CREATE client/.gitignore (590 bytes)
+CREATE client/tsconfig.app.json (277 bytes)
+CREATE client/tsconfig.spec.json (287 bytes)
+CREATE client/.vscode/extensions.json (134 bytes)
+CREATE client/.vscode/launch.json (490 bytes)
+CREATE client/.vscode/tasks.json (980 bytes)
+CREATE client/src/main.ts (256 bytes)
+CREATE client/src/favicon.ico (15086 bytes)
+CREATE client/src/index.html (305 bytes)
+CREATE client/src/styles.scss (81 bytes)
+CREATE client/src/app/app.component.html (21220 bytes)
+CREATE client/src/app/app.component.spec.ts (945 bytes)
+CREATE client/src/app/app.component.ts (379 bytes)
+CREATE client/src/app/app.component.scss (0 bytes)
+CREATE client/src/app/app.config.ts (235 bytes)
+CREATE client/src/app/app.routes.ts (80 bytes)
+CREATE client/src/assets/.gitkeep (0 bytes)
+✔ Packages installed successfully.
+    Directory is already under version control. Skipping initialization of git.
+```
+
+### Commands
+
+Angular Project Commands from client folder
+(See README in client folder for more detailed list)
+
+### Install Packages
+
+#### ngx-bootstrap
+
+[GitHub Repo](https://github.com/valor-software/ngx-bootstrap)
+
+| ngx-bootstrap | Angular | Bootstrap CSS  |
+| ------------- | ------- | -------------- |
+| 12.x.x        | 17.x.x  | 5.x.x or 4.x.x |
+
+```powershell
+npx ng add ngx-bootstrap
+
+ℹ Using package manager: npm
+✔ Found compatible package version: ngx-bootstrap@12.0.0.
+✔ Package information loaded.
+
+The package ngx-bootstrap@12.0.0 will be installed and executed.
+Would you like to proceed? Yes
+✔ Packages successfully installed.
+    ✅️ Added "bootstrap
+    ✅️ Added "ngx-bootstrap
+'ERROR: Could not find the project main file inside of the workspace config (src)'
+```
+
+```powershell
+npm i bootstrap
+npm i font-awesome
+```
+
+Update angular.json: projects > client > architect > options > styles:
+
+```text
+"styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "src/styles.scss"
+            ],
+```
+
+#### Other Considerations
+
+[How to Setup ESLint and Prettier in an Angular Project](https://blog.stackademic.com/how-to-setup-eslint-and-prettier-in-an-angular-project-82065799bc00)
+
+### Development Notes
+
+List of commands used to develop project
+
+```powershell
+npx ng g c navbar --skip-tests --dry-run
+```
