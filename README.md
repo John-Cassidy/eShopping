@@ -513,3 +513,11 @@ Update angular.json: projects > client > architect > options > styles:
 #### Other Considerations
 
 [How to Setup ESLint and Prettier in an Angular Project](https://blog.stackademic.com/how-to-setup-eslint-and-prettier-in-an-angular-project-82065799bc00)
+
+### Development Notes
+
+List of commands used to develop project
+
+```powershell
+npx ng g c navbar --skip-tests --dry-run
+```
