@@ -469,8 +469,47 @@ CREATE client/src/assets/.gitkeep (0 bytes)
 Angular Project Commands from client folder
 (See README in client folder for more detailed list)
 
-### Other Considerations
+### Install Packages
+
+#### ngx-bootstrap
+
+[GitHub Repo](https://github.com/valor-software/ngx-bootstrap)
+
+| ngx-bootstrap | Angular | Bootstrap CSS  |
+| ------------- | ------- | -------------- |
+| 12.x.x        | 17.x.x  | 5.x.x or 4.x.x |
+
+```powershell
+npx ng add ngx-bootstrap
+
+ℹ Using package manager: npm
+✔ Found compatible package version: ngx-bootstrap@12.0.0.
+✔ Package information loaded.
+
+The package ngx-bootstrap@12.0.0 will be installed and executed.
+Would you like to proceed? Yes
+✔ Packages successfully installed.
+    ✅️ Added "bootstrap
+    ✅️ Added "ngx-bootstrap
+'ERROR: Could not find the project main file inside of the workspace config (src)'
+```
+
+```powershell
+npm i bootstrap
+npm i font-awesome
+```
+
+Update angular.json: projects > client > architect > options > styles:
+
+```text
+"styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "src/styles.scss"
+            ],
+```
+
+#### Other Considerations
 
 [How to Setup ESLint and Prettier in an Angular Project](https://blog.stackademic.com/how-to-setup-eslint-and-prettier-in-an-angular-project-82065799bc00)
-
-### Mods
