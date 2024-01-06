@@ -521,3 +521,7 @@ List of commands used to develop project
 ```powershell
 npx ng g c navbar --skip-tests --dry-run
 ```
+
+#### Observable Sequence Diagram
+
+![Observable Sequence Diagram](./resources/observable-sequence-diagram.png)
