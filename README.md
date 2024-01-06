@@ -399,6 +399,12 @@ In this article, they will explore the different approaches to REST API versioni
 
 ## Angular
 
+The front-end application is built with Angular v17 standalone option that allows the application to use Standalone Components.
+
+[Article on Standalone Components](https://angular.io/guide/standalone-components)
+
+### Prerequisites
+
 Commands:
 
 ```powershell
@@ -412,6 +418,8 @@ npx --version
 10.2.3
 #NPX comes along with the NPM installation by default
 ```
+
+### Create Project
 
 Use npx to instead of Angular CLI to create projects, components, etc...
 [Article on Using npx](https://medium.com/@kbartsch/npx-how-to-use-multiple-angular-projects-with-different-versions-80b46085fa89)
@@ -454,10 +462,16 @@ CREATE client/src/assets/.gitkeep (0 bytes)
     Directory is already under version control. Skipping initialization of git.
 ```
 
+### Commands
+
 Angular Project Commands from client folder
 
 ```powershell
 
+#install node_modules
+npm install
+
+# run frontend application
 npx ng serve
 #or
 npm start //(default npm script inside package.json)
@@ -465,6 +479,6 @@ npm start //(default npm script inside package.json)
 
 ```
 
-Other Considerations:
+### Other Considerations
 
 [How to Setup ESLint and Prettier in an Angular Project](https://blog.stackademic.com/how-to-setup-eslint-and-prettier-in-an-angular-project-82065799bc00)
