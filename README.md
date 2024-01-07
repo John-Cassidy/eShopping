@@ -404,6 +404,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 The front-end application is built with Angular v17 standalone option that allows the application to use Standalone Components.
 
 [Article on Standalone Components](https://angular.io/guide/standalone-components)
+[Article on Standalone Components](https://medium.com/@mahmednisar/what-are-standalone-components-and-how-to-utilize-them-in-angular-848ad200e12b)
 
 ### Prerequisites
 
@@ -525,3 +526,7 @@ npx ng g c navbar --skip-tests --dry-run
 #### Observable Sequence Diagram
 
 ![Observable Sequence Diagram](./resources/observable-sequence-diagram.png)
+
+### Tranform Json to TypeScript
+
+[Vercel Website where you can input json and create TypeScript models](https://json2ts.vercel.app/)
