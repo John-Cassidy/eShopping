@@ -17,6 +17,12 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",
+                policy => { policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
+        });
         // var authScheme = "EShoppingGatewayAuthScheme";
         // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         //     .AddJwtBearer(authScheme, options =>
@@ -39,6 +45,7 @@ public class Startup
 
         app.AddCorrelationIdMiddleware();
         app.UseRouting();
+        app.UseCors("CorsPolicy");
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapGet("/", async context =>
