@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CoreComponent } from './core';
 import { HttpClient } from '@angular/common/http';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/products';
-import { NavbarComponent } from './navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
+import { SharedCompnent } from './shared';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, CoreComponent, SharedCompnent],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

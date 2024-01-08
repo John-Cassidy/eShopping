@@ -102,3 +102,105 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideHttpClient()],
 };
 ```
+
+## CoreComponent SharedComponent StoreComponent
+
+[How to use Shared Elements without using a Module](https://medium.com/@zayani.zied/angular-application-based-on-standalone-components-with-lazy-loading-and-shared-elements-417f36682968)
+
+### Option 2 CoreModule SharedModule StoreModule
+
+A Shared module enables the centralization and organization of common directives, pipes, and components into a single module, which can be imported as needed in other sections of the application.
+
+Create CoreModule and SharedModule in app folder.
+
+```powershell
+npx ng g m core --dry-run
+CREATE src/app/core/core.module.ts (202 bytes)
+
+npx ng g m shared --dry-run
+CREATE src/app/core/shared.module.ts (202 bytes)
+```
+
+### Option 1 CoreComponent SharedComponent StoreComponent
+
+Alternatively, CoreComponent SharedComponent StoreComponent can be created to do the same for applications using Standalone components.
+
+### create SharedComponent Instructions
+
+NOTE: Do same for CoreComponent and StoreComponent
+
+Create folders:
+
+- ~/app/shared/
+- ~/app/shared/components/
+- ~/app/shared/directives/
+- ~/app/shared/models/
+- ~/app/shared/pipes/
+
+Create index.ts (Barrel) file in each shared folder and each subfolder
+
+```powershell
+New-Item -Path . -Name "index.ts" -ItemType "file"
+
+```
+
+Export elements in the barrel (index.ts)
+
+```typescript
+import { Provider } from "@angular/core";
+import { OrderSummaryComponent } from "./order-summary/order-summary.component";
+
+export const COMMON_COMPONENTS: Provider[] = [
+    OrderSummaryComponent,
+];
+
+
+import { Provider } from "@angular/core";
+import { NgIf,NgFor } from "@angular/common";
+
+export const COMMON_DIRECTIVES: Provider[] = [
+    --- common directives
+];
+
+
+import { Provider } from "@angular/core";
+
+export const COMMON_PIPES: Provider[] = [
+  --- common pipes
+];
+```
+
+In index.ts file inside the shared directory, re-export all our common elements.
+
+```typescript
+import { COMMON_COMPONENTS } from './components';
+import { COMMON_DIRECTIVES } from './directives';
+import { COMMON_PIPES } from './pipes';
+
+export const SHARED = [COMMON_COMPONENTS, COMMON_DIRECTIVES, COMMON_PIPES];
+```
+
+Import shared elements throughout the entire application.
+
+```typescript
+import { SHARED } from './shared';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [SHARED],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+})
+export class AppComponent {
+```
+
+StoreComponent
+
+```powershell
+npx ng g c store --standalone --skip-tests=true --dry-run
+CREATE src/app/store/store.component.html (21 bytes)
+CREATE src/app/store/store.component.ts (243 bytes)
+CREATE src/app/store/store.component.scss (0 bytes)
+```
