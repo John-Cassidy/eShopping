@@ -196,11 +196,18 @@ import { SHARED } from './shared';
 export class AppComponent {
 ```
 
-StoreComponent
+StoreComponent, StoreService, Routes
+
+standalone components ng generate component store --route store --component store
 
 ```powershell
 npx ng g c store --standalone --skip-tests=true --dry-run
 CREATE src/app/store/store.component.html (21 bytes)
 CREATE src/app/store/store.component.ts (243 bytes)
 CREATE src/app/store/store.component.scss (0 bytes)
+
+npx ng g s store/store --flat --skip-tests --dry-run
+
+#create store/store.routes.ts
+New-Item -Path . -Name "store.routes.ts" -ItemType "file"
 ```
