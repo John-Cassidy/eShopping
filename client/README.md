@@ -214,3 +214,9 @@ New-Item -Path . -Name "store.routes.ts" -ItemType "file"
 #
 npx ng g c store/product-items --skip-tests --dry-run
 ```
+
+## NGX-Bootstrap Pagination
+
+[Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
+
+NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(PaginationModule.forRoot()) to app.config.ts

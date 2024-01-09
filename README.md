@@ -540,3 +540,7 @@ A Shared module enables the centralization and organization of common directives
 Alternatively, a SharedComponent can be created to do the same for applications using Standalone components.
 
 See client app README.md for informatino on how this project configured SharedComponents used by Standalone Components.
+
+### NGX-Bootstrap Pagination
+
+[Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)

@@ -4,6 +4,7 @@ import { CoreComponent } from '../core';
 import { IBrand } from '../shared/models/brand';
 import { IProduct } from '../shared/models/products';
 import { IType } from '../shared/models/type';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemsComponent } from './product-items/product-items.component';
 import { SharedCompnent } from '../shared';
 import { StoreParams } from '../shared/models/storeParams';
@@ -12,7 +13,13 @@ import { StoreService } from './store.service';
 @Component({
   selector: 'app-store',
   standalone: true,
-  imports: [CommonModule, CoreComponent, SharedCompnent, ProductItemsComponent],
+  imports: [
+    CommonModule,
+    CoreComponent,
+    SharedCompnent,
+    ProductItemsComponent,
+    PaginationModule,
+  ],
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',
 })
@@ -69,16 +76,18 @@ export class StoreComponent {
   }
   onBrandSelected(brandId: string) {
     this.storeParams.brandId = brandId;
-    // this.storeParams.pageNumber = 1;
     this.getProducts();
   }
   onTypeSelected(typeId: string) {
     this.storeParams.typeId = typeId;
-    // this.storeParams.pageNumber = 1;
     this.getProducts();
   }
   onSortSelected(sort: string) {
     this.storeParams.sort = sort;
+    this.getProducts();
+  }
+  onPageChanged(event: any) {
+    this.storeParams.pageNumber = event.page;
     this.getProducts();
   }
 }
