@@ -22,6 +22,11 @@ export class StoreComponent {
   types: IType[] = [];
   storeParams = new StoreParams();
   totalCount = 0;
+  sortOptions = [
+    { name: 'Alphabetical', value: 'name' },
+    { name: 'Price: Ascending', value: 'priceAsc' },
+    { name: 'Price: Descending', value: 'priceDesc' },
+  ];
 
   constructor(private storeService: StoreService) {}
 
@@ -70,6 +75,10 @@ export class StoreComponent {
   onTypeSelected(typeId: string) {
     this.storeParams.typeId = typeId;
     // this.storeParams.pageNumber = 1;
+    this.getProducts();
+  }
+  onSortSelected(sort: string) {
+    this.storeParams.sort = sort;
     this.getProducts();
   }
 }
