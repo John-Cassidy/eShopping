@@ -530,3 +530,17 @@ npx ng g c navbar --skip-tests --dry-run
 ### Tranform Json to TypeScript
 
 [Vercel Website where you can input json and create TypeScript models](https://json2ts.vercel.app/)
+
+### SharedComponents without using SharedModule
+
+[How to use Shared Elements without using a Module](https://medium.com/@zayani.zied/angular-application-based-on-standalone-components-with-lazy-loading-and-shared-elements-417f36682968)
+
+A Shared module enables the centralization and organization of common directives, pipes, and components into a single module, which can be imported as needed in other sections of the application.
+
+Alternatively, a SharedComponent can be created to do the same for applications using Standalone components.
+
+See client app README.md for informatino on how this project configured SharedComponents used by Standalone Components.
+
+### NGX-Bootstrap Pagination
+
+[Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
