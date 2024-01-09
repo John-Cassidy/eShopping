@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CoreComponent } from '../core';
 import { IProduct } from '../shared/models/products';
+import { ProductItemsComponent } from './product-items/product-items.component';
 import { SharedCompnent } from '../shared';
 import { StoreService } from './store.service';
 
 @Component({
   selector: 'app-store',
   standalone: true,
-  imports: [CommonModule, CoreComponent, SharedCompnent],
+  imports: [CommonModule, CoreComponent, SharedCompnent, ProductItemsComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss',
 })
