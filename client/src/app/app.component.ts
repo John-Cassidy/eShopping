@@ -1,16 +1,23 @@
-import { CommonModule } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
+
 import { Component } from '@angular/core';
 import { CoreComponent } from './core';
+import { HomeComponent } from './home/home.component';
 import { HttpClient } from '@angular/common/http';
 import { IPagination } from './shared/models/pagination';
 import { IProduct } from './shared/models/products';
-import { RouterOutlet } from '@angular/router';
-import { SharedCompnent } from './shared';
+import { SharedComponent } from './shared';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CoreComponent, SharedCompnent],
+  imports: [
+    RouterOutlet,
+    CoreComponent,
+    SharedComponent,
+    HomeComponent,
+    RouterModule,
+  ],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

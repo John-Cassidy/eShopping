@@ -1,10 +1,9 @@
-// import { COMMON_COMPONENTS } from "./components";
-
+import { COMMON_COMPONENTS } from './components';
 import { COMMON_DIRECTIVES } from './directives';
 import { COMMON_PIPES } from './pipes';
 
-export const SharedCompnent = [
-  // COMMON_COMPONENTS,
+export const SharedComponent = [
+  COMMON_COMPONENTS,
   COMMON_DIRECTIVES,
   COMMON_PIPES,
 ];

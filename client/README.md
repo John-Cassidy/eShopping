@@ -220,3 +220,11 @@ npx ng g c store/product-items --skip-tests --dry-run
 [Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
 
 NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(PaginationModule.forRoot()) to app.config.ts
+
+## Angular Routing
+
+```powershell
+npx ng g c home --standalone --skip-tests=true --dry-run
+
+npx ng g c store/product-details --skip-tests --dry-run
+```

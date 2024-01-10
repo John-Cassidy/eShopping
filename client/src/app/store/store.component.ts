@@ -1,13 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { CoreComponent } from '../core';
 import { IBrand } from '../shared/models/brand';
 import { IProduct } from '../shared/models/products';
 import { IType } from '../shared/models/type';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ProductItemsComponent } from './product-items/product-items.component';
-import { SharedCompnent } from '../shared';
+import { SharedComponent } from '../shared';
 import { StoreParams } from '../shared/models/storeParams';
 import { StoreService } from './store.service';
 
@@ -16,8 +15,7 @@ import { StoreService } from './store.service';
   standalone: true,
   imports: [
     CommonModule,
-    CoreComponent,
-    SharedCompnent,
+    SharedComponent,
     ProductItemsComponent,
     PaginationModule,
   ],
