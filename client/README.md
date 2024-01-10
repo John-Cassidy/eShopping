@@ -228,3 +228,22 @@ npx ng g c home --standalone --skip-tests=true --dry-run
 
 npx ng g c store/product-details --skip-tests --dry-run
 ```
+
+## Error Interceptor
+
+[HttpInterceptors - Standalone Applications](https://medium.com/@bhargavr445/angular-httpinterceptors-standalone-applications-part-5-dd855f052d45)
+
+```powershell
+
+# example of creating function based interceptor:
+# - export const errorInterceptor: HttpInterceptorFn
+npx ng g interceptor core/interceptors/error --functional --skip-tests --dry-run
+
+# example of creating class based interceptor:
+# - export class ErrorInterceptor implements HttpInterceptor
+npx ng g interceptor core/interceptors/error --functional=false --skip-tests --dry-run
+
+npx ng g c core/not-found --skip-tests --dry-run
+npx ng g c core/unauthenticated --skip-tests --dry-run
+npx ng g c core/server-error --skip-tests --dry-run
+```

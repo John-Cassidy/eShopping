@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { SharedComponent } from '../../shared';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-not-found',
   standalone: true,
   imports: [SharedComponent, RouterModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  templateUrl: './not-found.component.html',
+  styleUrl: './not-found.component.scss',
 })
-export class NavbarComponent {}
+export class NotFoundComponent {}
