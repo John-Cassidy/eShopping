@@ -544,3 +544,5 @@ See client app README.md for informatino on how this project configured SharedCo
 ### NGX-Bootstrap Pagination
 
 [Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
+
+### Angular Routing

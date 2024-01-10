@@ -13,14 +13,20 @@
   </div>
 
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
-    <a class="p-2">Home</a>
-    <a class="p-2">Store</a>
     <a
+      class="p-2"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a class="p-2" routerLink="/store" routerLinkActive="active">Store</a>
+    <!-- <a
       class="p-2"
       target="_blank"
       href="https://github.com/John-Cassidy/eShopping"
       >GitHub</a
-    >
+    > -->
   </nav>
   <div class="d-flex align-center">
     <a class="position-relative">
