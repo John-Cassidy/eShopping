@@ -219,7 +219,7 @@ npx ng g c store/product-items --skip-tests --dry-run
 
 [Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
 
-NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(PaginationModule.forRoot()) to app.config.ts
+NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(PaginationModule.forRoot()) to app.config.ts. In addition, you need to import PaginationModule into the standalone component where it will be used.
 
 ## Angular Routing
 
@@ -247,3 +247,29 @@ npx ng g c core/not-found --skip-tests --dry-run
 npx ng g c core/unauthenticated --skip-tests --dry-run
 npx ng g c core/server-error --skip-tests --dry-run
 ```
+
+## UI Components
+
+```powershell
+# Header Component
+npx ng g c core/header --skip-tests --dry-run
+
+# install xng-breadcrumb package
+npm i xng-breadcrumb --legacy-peer-deps
+
+# install ngx-spinner
+npm i ngx-spinner --legacy-peer-deps
+
+# example of creating function based interceptor:
+# - export const loadingInterceptor: HttpInterceptorFn
+npx ng g interceptor core/interceptors/loading --functional --skip-tests --dry-run
+
+# LoadingService
+npx ng g s core/services/loading --skip-tests --dry-run
+```
+
+## NGX-Bootstrap Carousel
+
+[Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
+
+NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(CarouselModule.forRoot()) to app.config.ts. In addition, you need to import CarouselModule into the standalone component where it will be used.

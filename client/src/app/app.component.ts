@@ -1,5 +1,6 @@
 import { RouterModule, RouterOutlet } from '@angular/router';
 
+import { BreadcrumbModule } from 'xng-breadcrumb';
 import { Component } from '@angular/core';
 import { CoreComponent } from './core';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +15,7 @@ import { SharedComponent } from './shared';
     SharedComponent,
     HomeComponent,
     RouterModule,
+    BreadcrumbModule,
   ],
   providers: [],
   templateUrl: './app.component.html',
