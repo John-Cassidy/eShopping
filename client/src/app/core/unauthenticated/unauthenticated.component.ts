@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { SharedComponent } from '../../shared';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-unauthenticated',
   standalone: true,
   imports: [SharedComponent, RouterModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  templateUrl: './unauthenticated.component.html',
+  styleUrl: './unauthenticated.component.scss',
 })
-export class NavbarComponent {}
+export class UnauthenticatedComponent {}
