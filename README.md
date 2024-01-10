@@ -550,3 +550,7 @@ See client app README.md for informatino on how this project configured SharedCo
 [xng-breadcrumb](https://github.com/udayvunnam/xng-breadcrumb)
 
 [Angular 17 functional HTTP interceptors](https://blog.herodevs.com/angular-15-introduces-functional-http-interceptors-59299cce60bf)
+
+### NGX-Bootstrap Carousel
+
+[Documentation](https://valor-software.com/ngx-bootstrap/#/components/carousel?tab=overview)
