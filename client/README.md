@@ -247,3 +247,11 @@ npx ng g c core/not-found --skip-tests --dry-run
 npx ng g c core/unauthenticated --skip-tests --dry-run
 npx ng g c core/server-error --skip-tests --dry-run
 ```
+
+## UI Components
+
+```powershell
+# Header Component
+npx ng g c core/header --skip-tests --dry-run
+
+```
