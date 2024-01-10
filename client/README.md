@@ -254,4 +254,16 @@ npx ng g c core/server-error --skip-tests --dry-run
 # Header Component
 npx ng g c core/header --skip-tests --dry-run
 
+# install xng-breadcrumb package
+npm i xng-breadcrumb --legacy-peer-deps
+
+# install ngx-spinner
+npm i ngx-spinner --legacy-peer-deps
+
+# example of creating function based interceptor:
+# - export const loadingInterceptor: HttpInterceptorFn
+npx ng g interceptor core/interceptors/loading --functional --skip-tests --dry-run
+
+# LoadingService
+npx ng g s core/services/loading --skip-tests --dry-run
 ```

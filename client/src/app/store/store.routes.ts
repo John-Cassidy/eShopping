@@ -10,5 +10,6 @@ export const STORE_ROUTES: Routes = [
   {
     path: ':id',
     component: ProductDetailsComponent,
+    data: { breadcrumb: { alias: 'productDetails' } },
   },
 ];
