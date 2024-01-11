@@ -196,6 +196,8 @@ import { SHARED } from './shared';
 export class AppComponent {
 ```
 
+### create StoreComponent Instructions
+
 StoreComponent, StoreService, Routes
 
 standalone components ng generate component store --route store --component store
@@ -273,3 +275,22 @@ npx ng g s core/services/loading --skip-tests --dry-run
 [Documentation](https://valor-software.com/ngx-bootstrap/#/components/pagination?tab=overview)
 
 NOTE: since this project uses standalone components, import module into store component and add importProvidersFrom(CarouselModule.forRoot()) to app.config.ts. In addition, you need to import CarouselModule into the standalone component where it will be used.
+
+## Basket
+
+### create BasketComponent Instructions
+
+BasketComponent, BasketService, Routes
+
+```powershell
+npx ng g c basket --standalone --skip-tests=true --dry-run
+CREATE src/app/basket/basket.component.html (22 bytes)
+CREATE src/app/basket/basket.component.ts (247 bytes)
+CREATE src/app/basket/basket.component.scss (0 bytes)
+
+npx ng g s basket/basket --flat --skip-tests --dry-run
+
+#create basket/basket.routes.ts
+New-Item -Path . -Name "basket.routes.ts" -ItemType "file"
+
+```
