@@ -38,7 +38,8 @@ public class Startup
                 //TODO read the same from settings for prod deployment
                 policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
             });
-        }).AddVersionedApiExplorer(
+        });
+        services.AddVersionedApiExplorer(
             options =>
             {
                 options.GroupNameFormat = "'v'VVV";
@@ -80,9 +81,10 @@ public class Startup
         });
         services.AddMassTransitHostedService(); // for MassTransit 7.0
 
+        // without authentication
         services.AddControllers();
 
-        // //Identity Server changes
+        // // with authentication localhost:9099
         // var userPolicy = new AuthorizationPolicyBuilder()
         //     .RequireAuthenticatedUser()
         //     .Build();
@@ -96,9 +98,40 @@ public class Startup
         //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         //     .AddJwtBearer(options =>
         //     {
-        //         options.Authority = "https://id-local.eshopping.com:44344";
+        //         options.Authority = "https://localhost:9099";
         //         options.Audience = "Basket";
         //     });
+        // services.AddAuthorization(options =>
+        // {
+        //     options.AddPolicy("BasketApi", policy => policy.RequireClaim("scope", "basketapi"));
+        // });
+
+        // // with authentication id-local.eshopping.com:44344
+        // services
+        //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(options =>
+        //     {
+        //         options.Authority = "https://id-local.eshopping.com:44344";
+        //         options.RequireHttpsMetadata = false;
+        //         options.TokenValidationParameters = new TokenValidationParameters
+        //         {
+        //             ValidateIssuer = true,
+        //             ValidateAudience = true,
+        //             ValidateLifetime = true,
+        //             ValidIssuer = "https://id-local.eshopping.com:44344",
+        //             ValidAudience = "Basket",
+        //         };
+        //         // options.Audience = "Basket";    
+        //         options.Audience = "https://id-local.eshopping.com:44344/resources";
+        //     });
+        // services.AddAuthorization(options =>
+        //     options.AddPolicy("BasketApi", policy =>
+        //     {
+        //         policy.RequireAuthenticatedUser();
+        //         policy.RequireClaim("scope", "basketapi");
+        //     })
+        // );
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

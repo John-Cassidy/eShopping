@@ -30,28 +30,19 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
         services.AddApiVersioning();
+        services.AddCors(options =>
+        {
+            //TODO read the same from settings for prod deployment
+            options.AddPolicy("CorsPolicy",
+                policy => { policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
+        });
         // .AddVersionedApiExplorer(
         // options =>
         // {
         //     options.GroupNameFormat = "'v'VVV";
         //     options.SubstituteApiVersionInUrl = true;
-        // });
-
-        // services.AddCors(options =>
-        // {
-        //     options.AddPolicy("CorsPolicy", policy =>
-        //     {
-        //         //TODO read the same from settings for prod deployment
-        //         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-        //     });
-        // }).AddVersionedApiExplorer(
-        //     options =>
-        //     {
-        //         options.GroupNameFormat = "'v'VVV";
-        //         options.SubstituteApiVersionInUrl = true;
-        //     });
+        // });        
 
         var connectionString = Configuration["DatabaseSettings:ConnectionString"];
         if (connectionString == null)
@@ -76,6 +67,32 @@ public class Startup
         services.AddScoped<ITypesRepository, ProductRepository>();
         services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
 
+        // without authentication
+        services.AddControllers();
+
+        // // with authentication localhost:9099
+        // var userPolicy = new AuthorizationPolicyBuilder()
+        //     .RequireAuthenticatedUser()
+        //     .Build();
+
+        // services.AddControllers(config =>
+        // {
+        //     config.Filters.Add(new AuthorizeFilter(userPolicy));
+        // });
+
+
+        // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //         .AddJwtBearer(options =>
+        //         {
+        //             options.Authority = "https://localhost:9099";
+        //             options.Audience = "Catalog";
+        //         });
+        // services.AddAuthorization(options =>
+        // {
+        //     options.AddPolicy("CatalogApi", policy => policy.RequireClaim("scope", "catalogapi"));
+        // });
+
+        // // with authentication id-local.eshopping.com:44344
         // services
         //     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         //     .AddJwtBearer(options =>
@@ -94,7 +111,7 @@ public class Startup
         //         options.Audience = "https://id-local.eshopping.com:44344/resources";
         //     });
         // services.AddAuthorization(options =>
-        //     options.AddPolicy("ApiScope", policy =>
+        //     options.AddPolicy("CatalogApi", policy =>
         //     {
         //         policy.RequireAuthenticatedUser();
         //         policy.RequireClaim("scope", "catalogapi");
@@ -139,13 +156,13 @@ public class Startup
         //     });
         // }
 
-        // app.UseMiddleware<AuthorizationLoggingMiddleware>();
-        // app.UseHttpsRedirection();
+        app.UseMiddleware<AuthorizationLoggingMiddleware>();
+        app.UseHttpsRedirection();
         app.UseRouting();
-        // app.UseCors("CorsPolicy");
-        // app.UseAuthentication();
+        app.UseCors("CorsPolicy");
+        app.UseAuthentication();
         app.UseStaticFiles();
-        // app.UseAuthorization();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {

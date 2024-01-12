@@ -6,7 +6,7 @@ namespace Basket.API.Controllers;
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-// [Authorize]
+// [Authorize(Policy = "BasketApi")]
 public class ApiController : ControllerBase
 {
 
