@@ -1,9 +1,9 @@
-import { RouterModule, RouterOutlet } from '@angular/router';
-
+import { BasketService } from './basket/basket.service';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { Component } from '@angular/core';
 import { CoreComponent } from './core';
 import { HomeComponent } from './home/home.component';
+import { RouterOutlet } from '@angular/router';
 import { SharedComponent } from './shared';
 
 @Component({
@@ -14,7 +14,6 @@ import { SharedComponent } from './shared';
     CoreComponent,
     SharedComponent,
     HomeComponent,
-    RouterModule,
     BreadcrumbModule,
   ],
   providers: [],
@@ -24,9 +23,12 @@ import { SharedComponent } from './shared';
 export class AppComponent {
   title = 'eShopping';
 
-  constructor() {
-    // constructor logic here
-  }
+  constructor(private basketService: BasketService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    const basket_username = localStorage.getItem('basket_username');
+    if (basket_username) {
+      this.basketService.getBasket(basket_username);
+    }
+  }
 }
