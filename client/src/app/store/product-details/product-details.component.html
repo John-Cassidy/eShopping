@@ -12,6 +12,7 @@
       <p style="font-size: 2em">{{ product.price | currency : 'USD' }}</p>
       <div class="d-flex justify-content-start align-items-center">
         <i
+          (click)="decrementQuantity()"
           class="fa fa-minus-circle text-warning mr-2"
           style="cursor: pointer; font-size: 2em"
         ></i>
@@ -19,10 +20,16 @@
           quantity
         }}</span>
         <i
+          (click)="incrementQuantity()"
           class="fa fa-plus-circle text-warning mx-2"
           style="cursor: pointer; font-size: 2em"
         ></i>
-        <button class="btn btn-outline-primary btn-lg ml-4">Add to Cart</button>
+        <button
+          (click)="addItemToCart()"
+          class="btn btn-outline-primary btn-lg ml-4"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
     <div class="row">
