@@ -3,6 +3,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { Routes } from '@angular/router';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { UnauthenticatedComponent } from './core/unauthenticated/unauthenticated.component';
+import { authGuardFactory } from './core/guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,13 @@ export const APP_ROUTES: Routes = [
     loadChildren: () =>
       import('./basket/basket.routes').then((m) => m.BASKET_ROUTES),
     data: { breadcrumb: 'Basket' },
+  },
+  {
+    path: 'checkout',
+    canActivate: [authGuardFactory],
+    loadChildren: () =>
+      import('./checkout/checkout.routes').then((m) => m.CHECKOUT_ROUTES),
+    data: { breadcrumb: 'Checkout' },
   },
   {
     path: 'account',

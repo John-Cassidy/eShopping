@@ -4,11 +4,13 @@ import {
   IBasketItem,
   IBasketTotal,
 } from '../shared/models/basket';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { AcntService } from '../account/acnt.service';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../shared/models/products';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +26,11 @@ export class BasketService {
   basketTotal$ = this.basketTotal.asObservable();
   // #endregion
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private acntService: AcntService,
+    private router: Router
+  ) {}
 
   // #region public methods
   getBasket(userName: string) {
@@ -48,6 +54,23 @@ export class BasketService {
           this.calculateBasketTotal();
         },
         error: (err) => console.log(err),
+      });
+  }
+
+  checkoutBasket(basket: IBasket) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.acntService.authorizationHeaderValue,
+      }),
+    };
+    return this.http
+      .post<IBasket>(this.baseUrl + '/Basket/CheckoutV1', basket, httpOptions)
+      .subscribe({
+        next: (basket) => {
+          this.basketSource.next(null);
+          this.router.navigateByUrl('/');
+        },
       });
   }
 
