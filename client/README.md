@@ -280,7 +280,7 @@ NOTE: since this project uses standalone components, import module into store co
 
 ### create BasketComponent Instructions
 
-BasketComponent, BasketService, Routes
+BasketComponent, BasketService, Routes, OrderSummaryComponent
 
 ```powershell
 npx ng g c basket --standalone --skip-tests=true --dry-run
@@ -293,4 +293,8 @@ npx ng g s basket/basket --flat --skip-tests --dry-run
 #create basket/basket.routes.ts
 New-Item -Path . -Name "basket.routes.ts" -ItemType "file"
 
+npx ng g c shared/order-summary --skip-tests --dry-run
+CREATE src/app/shared/order-summary/order-summary.component.html (29 bytes)
+CREATE src/app/shared/order-summary/order-summary.component.ts (274 bytes)
+CREATE src/app/shared/order-summary/order-summary.component.scss (0 bytes)
 ```

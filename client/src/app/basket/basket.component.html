@@ -48,7 +48,7 @@
                   </div>
                 </th>
                 <td class="align-middle">
-                  <strong>{{ item.price | currency : 'INR' }}</strong>
+                  <strong>{{ item.price | currency : 'USD' }}</strong>
                 </td>
                 <td class="align-middle">
                   <div class="d-flex align-items-center">
@@ -69,7 +69,7 @@
                 </td>
                 <td class="align-middle">
                   <strong>{{
-                    item.price * item.quantity | currency : 'INR'
+                    item.price * item.quantity | currency : 'USD'
                   }}</strong>
                 </td>
                 <td class="align-middle text-center">
@@ -87,17 +87,17 @@
           </table>
         </div>
       </div>
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-6 offset-6">
           <app-order-summary></app-order-summary>
           <a
             routerLink="/account/login"
             class="btn btn-outline-primary py-2 btn-block"
           >
-            checkout Please!!!
+            go to checkout
           </a>
         </div>
-      </div> -->
+      </div>
     </div>
   </ng-container>
 </div>
