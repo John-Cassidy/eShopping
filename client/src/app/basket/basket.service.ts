@@ -1,6 +1,8 @@
 import {
   Basket,
+  BasketCheckout,
   IBasket,
+  IBasketCheckout,
   IBasketItem,
   IBasketTotal,
 } from '../shared/models/basket';
@@ -58,6 +60,24 @@ export class BasketService {
   }
 
   checkoutBasket(basket: IBasket) {
+    // create create basketCheckout = new BasketCheckout assigning values from basket
+    const basketCheckout: IBasketCheckout = {
+      userName: basket.userName,
+      totalPrice: basket.totalPrice,
+      firstName: 'Frank',
+      lastName: 'Rizzo',
+      emailAddress: 'frankrizzo@gmail.com',
+      addressLine: '50 Main St.',
+      country: 'USA',
+      state: 'MA',
+      zipCode: '02138',
+      cardName: 'Visa',
+      cardNumber: '1234567890123456',
+      expiration: '12/25',
+      cvv: '123',
+      paymentMethod: 1,
+    };
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -65,11 +85,19 @@ export class BasketService {
       }),
     };
     return this.http
-      .post<IBasket>(this.baseUrl + '/Basket/CheckoutV1', basket, httpOptions)
+      .post<IBasket>(
+        this.baseUrl + '/Basket/Checkout',
+        basketCheckout,
+        httpOptions
+      )
       .subscribe({
         next: (basket) => {
           this.basketSource.next(null);
           this.router.navigateByUrl('/');
+        },
+        error: (err) => {
+          console.log('Error Occurred calling basket checkout');
+          console.log(err);
         },
       });
   }
@@ -164,7 +192,7 @@ export class BasketService {
           localStorage.removeItem('basket_username');
         },
         error: (err) => {
-          console.log('Error Occurred while deletin basket');
+          console.log('Error Occurred while deleting basket');
           console.log(err);
         },
       });

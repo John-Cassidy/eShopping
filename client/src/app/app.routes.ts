@@ -2,6 +2,8 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { Routes } from '@angular/router';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
+import { SigninRedirectCallbackComponent } from './account/signin-redirect-callback/signin-redirect-callback.component';
+import { SignoutRedirectCallbackComponent } from './account/signout-redirect-callback.component/signout-redirect-callback.component.component';
 import { UnauthenticatedComponent } from './core/unauthenticated/unauthenticated.component';
 import { authGuardFactory } from './core/guards/auth.guard';
 
@@ -16,6 +18,8 @@ export const APP_ROUTES: Routes = [
       import('./store/store.routes').then((m) => m.STORE_ROUTES),
     data: { breadcrumb: 'Store' },
   },
+  { path: 'signin-callback', component: SigninRedirectCallbackComponent },
+  { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
   {
     path: 'basket',
     loadChildren: () =>

@@ -77,8 +77,8 @@ public static class Config
 
                 RedirectUris = new List<string>
                 {
-                    "http://localhost:4200/signin-callback",
-                    "http://localhost:4200/assets/silent-callback.html",
+                    "https://localhost:4201/signin-callback",
+                    "https://localhost:4201/assets/silent-callback.html",
                     "https://localhost:9099/signin-oidc",
                 },
                 RequirePkce = true,
@@ -94,13 +94,13 @@ public static class Config
                 },
                 AllowedCorsOrigins = new List<string>
                 {
-                    "http://localhost:4200"
+                    "https://localhost:4201"
                 },
                 RequireClientSecret = false,
                 AllowRememberConsent = false,
                 PostLogoutRedirectUris = new List<string>
                 {
-                    "http://localhost:4200/signout-callback",
+                    "https://localhost:4201/signout-callback",
                     "https://localhost:9099/signout-callback-oidc"
                 },
                 RequireConsent = false,

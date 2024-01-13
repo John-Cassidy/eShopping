@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AcntService } from '../acnt.service';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SharedComponent } from '../../shared';
 
 @Component({
   selector: 'app-signout-redirect-callback.component',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, SharedComponent],
   template: `<div></div>`,
   styles: ``,
 })
-export class SignoutRedirectCallbackComponentComponent implements OnInit {
+export class SignoutRedirectCallbackComponent implements OnInit {
   constructor(private _router: Router, private acntService: AcntService) {}
 
   ngOnInit(): void {

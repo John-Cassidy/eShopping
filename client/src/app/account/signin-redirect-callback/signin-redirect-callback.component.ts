@@ -2,11 +2,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { AcntService } from '../acnt.service';
+import { CommonModule } from '@angular/common';
+import { SharedComponent } from '../../shared';
 
 @Component({
   selector: 'app-signin-redirect-callback',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, SharedComponent],
   template: `<div></div>`,
   styles: ``,
 })
