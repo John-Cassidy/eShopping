@@ -574,3 +574,124 @@ Integrate IdentityServer into UI:
 
 - 401 Error Interceptor
 - Checkout giving 400 Error
+
+## Kubernetes & AKS
+
+[kubectl Quick Reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+
+[kubectl Context and Configuration](https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-context-and-configuration)
+
+### Generate kubernetes secret
+
+Following powershell script will encode/decode secret used by kubernetes secrets:
+
+```powershell
+$Text = 'username'
+# base64 encode
+$EncodedText = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($Text))
+# base64 decode
+$DecodedText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($EncodedText))
+# output
+Write-Host $EncodedText # = dXNlcm5hbWU=
+Write-Host $DecodedText # = username
+
+$Text = 'password'
+# base64 encode
+$EncodedText = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($Text))
+# base64 decode
+$DecodedText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($EncodedText))
+# output
+Write-Host $EncodedText # = cGFzc3dvcmQ=
+Write-Host $DecodedText # = password
+```
+
+### Tag docker image: catalogapi:latest
+
+create tag for this image and upload to docker hub
+
+> jpcassidy/eshopping-catalogapi:latest
+
+### Install and connect to kubernetes dashboard
+
+#### Instructions for installing kubernetes dashboard v3.0.0.alpha
+
+[kubernetes dashboard v3.0.0.alpha Instructions](https://github.com/kubernetes/dashboard)
+
+kubernetes dashboard v3.0.0.alpha - suggests installing with helm
+
+#### Instructions for installing kubernetes dashboard v2.7.0
+
+Reference /kubernetes/Kubernetes.md
+
+### kubectl apply
+
+```powershell
+cd .\Deployments\k8s\catalog\catalog-db\
+
+kubectl apply -f mongo-secret.yaml
+
+kubectl apply -f mongo-configmap.yaml
+
+kubectl apply -f catalog-db.yaml
+
+cd ..\catalog-api\
+
+kubectl apply -f catalog-api.yaml
+```
+
+### kubectl delete
+
+```powershell
+cd .\Deployments\k8s\catalog\catalog-api\
+
+kubectl delete -f catalog-api.yaml
+
+cd ..\catalog-db\
+
+kubectl delete -f catalog-db.yaml
+
+kubectl delete -f mongo-configmap.yaml
+
+kubectl delete -f mongo-secret.yaml
+
+
+```
+
+### Catalog API Swagger Access
+
+```powershell
+run kubectl get all
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/catalog-api-service   NodePort    10.101.138.221   <none>        9000:31000/TCP   6m58s
+
+```
+
+The service catalog-api-service is exposed as a NodePort service at port 31000.
+
+To access the API in your browser, you need the IP address of one of your Kubernetes nodes (you can use either the internal or external IP, depending on where you are accessing from) and the NodePort (31000 in this case).
+
+If you're running Kubernetes locally (like minikube), you can usually use localhost or 127.0.0.1 as the IP.
+
+So, the URL to access the API would look something like this:
+
+```text
+http://<node-ip>:31000
+```
+
+Replace <node-ip> with the IP address of your Kubernetes node.
+
+If you don't know your node IP, you can get it by running:
+
+```powershell
+kubectl get nodes -o wide
+
+NAME             STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE         KERNEL-VERSION                       CONTAINER-RUNTIME
+docker-desktop   Ready    control-plane   77d   v1.28.2   192.168.65.3   <none>        Docker Desktop   5.15.133.1-microsoft-standard-WSL2   docker://24.0.7
+```
+
+The IP addresses will be listed in the INTERNAL-IP or EXTERNAL-IP column.
+
+```text
+http://192.168.65.3:31000
+```
