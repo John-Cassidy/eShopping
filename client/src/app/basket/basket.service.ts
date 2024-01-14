@@ -1,14 +1,18 @@
 import {
   Basket,
+  BasketCheckout,
   IBasket,
+  IBasketCheckout,
   IBasketItem,
   IBasketTotal,
 } from '../shared/models/basket';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { AcntService } from '../account/acnt.service';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../shared/models/products';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +28,11 @@ export class BasketService {
   basketTotal$ = this.basketTotal.asObservable();
   // #endregion
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private acntService: AcntService,
+    private router: Router
+  ) {}
 
   // #region public methods
   getBasket(userName: string) {
@@ -48,6 +56,49 @@ export class BasketService {
           this.calculateBasketTotal();
         },
         error: (err) => console.log(err),
+      });
+  }
+
+  checkoutBasket(basket: IBasket) {
+    // create create basketCheckout = new BasketCheckout assigning values from basket
+    const basketCheckout: IBasketCheckout = {
+      userName: basket.userName,
+      totalPrice: basket.totalPrice,
+      firstName: 'Frank',
+      lastName: 'Rizzo',
+      emailAddress: 'frankrizzo@gmail.com',
+      addressLine: '50 Main St.',
+      country: 'USA',
+      state: 'MA',
+      zipCode: '02138',
+      cardName: 'Visa',
+      cardNumber: '1234567890123456',
+      expiration: '12/25',
+      cvv: '123',
+      paymentMethod: 1,
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.acntService.authorizationHeaderValue,
+      }),
+    };
+    return this.http
+      .post<IBasket>(
+        this.baseUrl + '/Basket/Checkout',
+        basketCheckout,
+        httpOptions
+      )
+      .subscribe({
+        next: (basket) => {
+          this.basketSource.next(null);
+          this.router.navigateByUrl('/');
+        },
+        error: (err) => {
+          console.log('Error Occurred calling basket checkout');
+          console.log(err);
+        },
       });
   }
 
@@ -141,7 +192,7 @@ export class BasketService {
           localStorage.removeItem('basket_username');
         },
         error: (err) => {
-          console.log('Error Occurred while deletin basket');
+          console.log('Error Occurred while deleting basket');
           console.log(err);
         },
       });

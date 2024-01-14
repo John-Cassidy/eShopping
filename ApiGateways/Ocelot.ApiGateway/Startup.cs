@@ -17,21 +17,31 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-
+        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
         services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy",
                 policy => { policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
         });
-        // var authScheme = "EShoppingGatewayAuthScheme";
+
+        // // with authentication localhost:9099
+        // // // var authScheme = "EShoppingGatewayAuthScheme";
         // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        //     .AddJwtBearer(authScheme, options =>
+        //     .AddJwtBearer(options =>
         //     {
         //         options.Authority = "https://localhost:9099";
         //         options.Audience = "EShoppingGateway";
         //     });
 
-        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+        // // with authentication id-local.eshopping.com:44344
+        // // // var authScheme = "EShoppingGatewayAuthScheme";
+        // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(options =>
+        //     {
+        //         options.Authority = "https://id-local.eshopping.com:44344";
+        //         options.Audience = "EShoppingGateway";
+        //     });
+
         services.AddOcelot()
             .AddCacheManager(x => x.WithDictionaryHandle());
     }

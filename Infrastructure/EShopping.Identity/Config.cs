@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace EShopping.Identity;
 
@@ -33,8 +34,12 @@ public static class Config
             },
             new ApiResource("EShoppingGateway", "EShopping Gateway")
             {
-                Scopes = {"eshoppinggateway"}
+                Scopes = {"eshoppinggateway", "catalogapi", "basketapi" }
             },
+            new ApiResource("eshoppingAngular", "EShopping Angular")
+            {
+                Scopes = {"eshoppinggateway", "catalogapi", "basketapi"}
+            }
         };
 
     public static IEnumerable<Client> Clients =>
@@ -63,6 +68,47 @@ public static class Config
                 ClientSecrets = {new Secret("5c7fd5c5-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 AllowedScopes = { "eshoppinggateway", "basketapi", "catalogapi"}
+            },
+            new Client
+            {
+                ClientName = "Angular Client",
+                ClientId = "angular-client",
+                AllowedGrantTypes = GrantTypes.Code,
+
+                RedirectUris = new List<string>
+                {
+                    "https://localhost:4201/signin-callback",
+                    "https://localhost:4201/assets/silent-callback.html",
+                    "https://localhost:9099/signin-oidc",
+                },
+                RequirePkce = true,
+                AllowAccessTokensViaBrowser = true,
+                Enabled = true,
+                UpdateAccessTokenClaimsOnRefresh = true,
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "eshoppinggateway",
+                },
+                AllowedCorsOrigins = new List<string>
+                {
+                    "https://localhost:4201"
+                },
+                RequireClientSecret = false,
+                AllowRememberConsent = false,
+                PostLogoutRedirectUris = new List<string>
+                {
+                    "https://localhost:4201/signout-callback",
+                    "https://localhost:9099/signout-callback-oidc"
+                },
+                RequireConsent = false,
+                AccessTokenLifetime = 3600,
+                ClientSecrets = new List<Secret>
+                {
+                    new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())
+                }
             }
 
             // // interactive client using code flow + pkce

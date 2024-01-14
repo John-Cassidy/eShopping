@@ -554,3 +554,23 @@ See client app README.md for informatino on how this project configured SharedCo
 ### NGX-Bootstrap Carousel
 
 [Documentation](https://valor-software.com/ngx-bootstrap/#/components/carousel?tab=overview)
+
+## Identity Server Client Implementation
+
+Integrate IdentityServer into UI:
+
+- Account Component, Account Service
+- Account Routing
+- Server Side Changes
+- Checkout Flow
+- Can Activate Route Guard
+- Package.json changes
+- Silent Callback
+- Changes to:
+
+  - Basket Service
+  - Checkout Component
+  - NavBar
+
+- 401 Error Interceptor
+- Checkout giving 400 Error

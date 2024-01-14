@@ -298,3 +298,82 @@ CREATE src/app/shared/order-summary/order-summary.component.html (29 bytes)
 CREATE src/app/shared/order-summary/order-summary.component.ts (274 bytes)
 CREATE src/app/shared/order-summary/order-summary.component.scss (0 bytes)
 ```
+
+## Identity Server Client Implementation
+
+Integrate IdentityServer into UI:
+
+- Account Component, Account Service
+- Account Routing
+- Server Side Changes
+- Checkout Flow
+- Can Activate Route Guard
+- Package.json changes
+- Silent Callback
+- Changes to:
+
+  - Basket Service
+  - Checkout Component
+  - NavBar
+
+- 401 Error Interceptor
+- Checkout giving 400 Error
+
+Account Component, Account Service
+
+```powershell
+npx ng g c account --standalone --skip-tests=true --dry-run
+CREATE src/app/account/account.component.html (23 bytes)
+CREATE src/app/account/account.component.ts (251 bytes)
+CREATE src/app/account/account.component.scss (0 bytes)
+
+npx ng g s account/account --flat --skip-tests --dry-run
+
+#create account/account.routes.ts
+New-Item -Path . -Name "account.routes.ts" -ItemType "file"
+
+npx ng g c account/login --standalone --skip-tests=true --dry-run
+CREATE src/app/account/login/login.component.html (21 bytes)
+CREATE src/app/account/login/login.component.ts (243 bytes)
+CREATE src/app/account/login/login.component.scss (0 bytes)
+
+npx ng g c account/register --standalone --skip-tests=true --dry-run
+CREATE src/app/account/register/register.component.html (24 bytes)
+CREATE src/app/account/register/register.component.ts (255 bytes)
+CREATE src/app/account/register/register.component.scss (0 bytes)
+```
+
+Checkout Component, Checkout Service
+
+```powershell
+npx ng g c checkout --standalone --skip-tests=true --dry-run
+CREATE src/app/checkout/checkout.component.html (24 bytes)
+CREATE src/app/checkout/checkout.component.ts (255 bytes)
+CREATE src/app/checkout/checkout.component.scss (0 bytes)
+
+npx ng g s checkout/checkout --flat --skip-tests --dry-run
+
+
+#create checkout/checkout.routes.ts
+New-Item -Path . -Name "checkout.routes.ts" -ItemType "file"
+```
+
+Authentication Workflow
+
+```powershell
+# install oidc-client package
+npm i oidc-client --legacy-peer-deps
+```
+
+```powershell
+npx ng g s account/acnt --flat --skip-tests --dry-run
+CREATE src/app/account/acnt.service.ts (142 bytes)
+
+npx ng g c account/signin-redirect-callback --standalone -t -s --skip-tests --dry-run
+
+npx ng g c account/signout-redirect-callback.component --standalone -t -s --skip-tests --dry-run
+
+npx ng generate guard core/guards/auth --flat --skip-tests --dry-run
+? Which type of guard would you like to create? CanActivate
+CREATE src/app/core/guards/auth.guard.ts (133 bytes)
+```

@@ -30,7 +30,7 @@ public class TestUsers
                 {
                     SubjectId = "02e723cd-975c-4ec1-b415-d93f00839df8",
                     Username = "frizzo",
-                    Password = "Admin_1234",
+                    Password = "Admin_1234",        
                     Claims =
                     {
                         new Claim(JwtClaimTypes.GivenName, "Frank"),

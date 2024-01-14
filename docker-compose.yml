@@ -57,6 +57,12 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:7.9.2
 
+  # identityserver:
+  #   image: ${DOCKER_REGISTRY-}identityserver
+  #   build:
+  #     context: .
+  #     dockerfile: Infrastructure/EShopping.Identity/Dockerfile
+
 volumes:
   mongo_data:
   postgres_data:
