@@ -30,6 +30,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        // without authentication
+        services.AddControllers();
+
         services.AddApiVersioning();
         services.AddCors(options =>
         {
@@ -80,9 +83,6 @@ public class Startup
             });
         });
         services.AddMassTransitHostedService(); // for MassTransit 7.0
-
-        // without authentication
-        services.AddControllers();
 
         // // with authentication localhost:9099
         // var userPolicy = new AuthorizationPolicyBuilder()

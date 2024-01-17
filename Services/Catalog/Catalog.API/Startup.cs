@@ -156,7 +156,7 @@ public class Startup
         //     });
         // }
 
-        app.UseMiddleware<AuthorizationLoggingMiddleware>();
+        // app.UseMiddleware<AuthorizationLoggingMiddleware>();
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseCors("CorsPolicy");
