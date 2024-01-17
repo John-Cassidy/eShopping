@@ -1,0 +1,13 @@
+{{- $name := include "ocelotapigw.fullname" . -}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: "ocelotapigw-{{ $name }}"
+    labels:
+        app: {{ template "ocelotapigw.name" . }}
+        chart: {{ template "ocelotapigw.chart" . }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+data:
+    ElasticConfiguration__Uri: http://elasticsearch:9200

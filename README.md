@@ -695,3 +695,74 @@ The IP addresses will be listed in the INTERNAL-IP or EXTERNAL-IP column.
 ```text
 http://192.168.65.3:31000
 ```
+
+## Helm
+
+[Quickstart](https://helm.sh/docs/intro/quickstart/)
+
+[Install](https://helm.sh/docs/intro/install/)
+
+### Create / Tag docker images and upload to container repository
+
+| Image       | Repository                             |
+| ----------- | -------------------------------------- |
+| basketapi   | jpcassidy/eshopping-basketapi:latest   |
+| catalogapi  | jpcassidy/eshopping-catalogapi:latest  |
+| discountapi | jpcassidy/eshopping-discountapi:latest |
+| orderingapi | jpcassidy/eshopping-orderingapi:latest |
+| ocelotapigw | jpcassidy/eshopping-ocelotapigw:latest |
+
+Note: ocelotapigw will need ocelot.k8s.json created and configured to work with kubernetes deployment.
+
+### Create / Configure helm charts
+
+Create Helm Charts in .\Deployments\helm folder.
+
+```powershell
+# basketdb
+helm create basketdb
+# basket
+helm create basket
+# catalogdb
+helm create catalogdb
+# catalog
+helm create catalog
+# discountdb
+helm create discountdb
+# discount
+helm create discount
+# elasticsearch
+helm create elasticsearch
+# kibana
+helm create kibana
+# ocelotapigw
+helm create ocelotapigw
+# orderdb
+helm create orderdb
+# ordering
+helm create ordering
+# rabbitmq
+helm create rabbitmq
+```
+
+Configure values.yaml with properties from docker-compose files. Use the repository image names uploaded to container registry.
+
+Create configure.yaml files to store env variables in the templates folder of each helm chart.
+
+### install / uninstall helm charts
+
+```powershell
+# run scripts from /Deployment/helm/ folder
+.\install-helm.ps1
+~~~~
+.\uninstall-helm.ps1
+
+# check context
+kubectl config current-context
+kubectl get all
+
+```
+
+### How to Build & Push Helm Chart to Docker Hub
+
+[Documentation](https://forums.docker.com/t/how-to-build-push-helm-chart-to-docker-hub/133548)
