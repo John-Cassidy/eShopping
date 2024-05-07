@@ -27,6 +27,14 @@ services:
     ports:
       - '6379:6379'
 
+  basketdb-commander:
+    container_name: basketdb-commander
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:basketdb:6379
+    ports:
+      - '8081:8081'
+
   discountdb:
     container_name: discountdb
     environment:

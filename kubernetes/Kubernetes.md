@@ -1,6 +1,6 @@
 # Setup Dashboard
 
-Running Kubernetes Dashboard - instructions provided by Andre Lock
+Running Kubernetes Dashboard - instructions provided by Andrew Lock
 [https://andrewlock.net/running-kubernetes-and-the-dashboard-with-docker-desktop/](https://andrewlock.net/running-kubernetes-and-the-dashboard-with-docker-desktop/)
 
 Install Dashboard v2.7

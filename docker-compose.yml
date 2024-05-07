@@ -12,6 +12,9 @@ services:
   basketdb:
     image: redis:alpine
 
+  basketdb-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+
   discountdb:
     image: postgres
 
